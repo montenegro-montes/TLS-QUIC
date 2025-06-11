@@ -25,3 +25,5 @@ This project automates performance testing of TLS vs QUIC with various quantum-s
 Make Launcherv3.sh executable and run:
   ./Launcher.sh [tls|quic] [mutual|single] [capture|captureKey|nocapture] [none|simple|stable|unstable] [loss-percent] [delay-ms]
 
+## Contributing
+Contributions are welcome! Please open issues or pull requests for bug fixes, new features, or documentation improvements.
