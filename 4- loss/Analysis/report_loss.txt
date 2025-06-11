@@ -1,0 +1,1222 @@
+#python3 analysis_tls_quic_loss.py --ideal-dir ./ideal --loss-dir loss5 loss10 loss20 > report_loss.txt
+
+=== Per-Level KEM Comparisons (Loss=0%) ===
+
+Level 1 – QUIC
+
+**Descriptive statistics (with Outlier count):**
+| KEM             |   Mean |   DesvStd |   Median |   Min |   Max |   Outliers |
+|:----------------|-------:|----------:|---------:|------:|------:|-----------:|
+| P-256           |   2.79 |      0.37 |     2.67 |  2.23 |  4.43 |          7 |
+| mlkem512        |   2.65 |      0.33 |     2.56 |  2.05 |  4.91 |         34 |
+| p256_mlkem512   |  11.91 |      2.02 |    10.86 | 10.10 | 18.14 |         89 |
+| x25519          |   2.36 |      0.29 |     2.27 |  1.95 |  3.48 |         19 |
+| x25519_mlkem512 |   4.64 |      0.59 |     4.38 |  3.98 |  7.43 |         48 |
+
+**Shapiro–Wilk (p-valores):**
+| KEM             |   Shapiro_p |
+|:----------------|------------:|
+| P-256           |    3.47e-17 |
+| mlkem512        |    7.01e-18 |
+| p256_mlkem512   |    4.79e-28 |
+| x25519          |    2.41e-18 |
+| x25519_mlkem512 |    1.73e-25 |
+
+**Levene's test p-value:** 4.14e-106
+
+**Kruskal–Wallis p = 0.00e+00
+
+**Pairwise Mann–Whitney (p-values):**
+| KEM1          | KEM2            |   p-value |
+|:--------------|:----------------|----------:|
+| P-256         | mlkem512        |         0 |
+| P-256         | p256_mlkem512   |         0 |
+| P-256         | x25519          |         0 |
+| P-256         | x25519_mlkem512 |         0 |
+| mlkem512      | p256_mlkem512   |         0 |
+| mlkem512      | x25519          |         0 |
+| mlkem512      | x25519_mlkem512 |         0 |
+| p256_mlkem512 | x25519          |         0 |
+| p256_mlkem512 | x25519_mlkem512 |         0 |
+| x25519        | x25519_mlkem512 |         0 |
+
+**Pairwise t-tests (p-values):**
+| KEM1          | KEM2            |      p-value |
+|:--------------|:----------------|-------------:|
+| P-256         | mlkem512        | 2.68e-10     |
+| P-256         | p256_mlkem512   | 0            |
+| P-256         | x25519          | 1.42e-76     |
+| P-256         | x25519_mlkem512 | 8.52e-304    |
+| mlkem512      | p256_mlkem512   | 0            |
+| mlkem512      | x25519          | 2.24e-42     |
+| mlkem512      | x25519_mlkem512 | 5.92879e-323 |
+| p256_mlkem512 | x25519          | 0            |
+| p256_mlkem512 | x25519_mlkem512 | 6.41e-308    |
+| x25519        | x25519_mlkem512 | 0            |
+
+Level 1 – TLS
+
+**Descriptive statistics (with Outlier count):**
+| KEM             |   Mean |   DesvStd |   Median |   Min |   Max |   Outliers |
+|:----------------|-------:|----------:|---------:|------:|------:|-----------:|
+| P-256           |   2.49 |      0.38 |     2.41 |  1.74 |  5.32 |          2 |
+| mlkem512        |   2.49 |      0.36 |     2.40 |  1.78 |  3.72 |          9 |
+| p256_mlkem512   |   9.36 |      1.37 |     8.93 |  7.16 | 14.16 |          5 |
+| x25519          |   2.20 |      0.36 |     2.13 |  1.54 |  4.34 |          3 |
+| x25519_mlkem512 |   2.50 |      0.43 |     2.37 |  2.01 |  4.60 |         47 |
+
+**Shapiro–Wilk (p-valores):**
+| KEM             |   Shapiro_p |
+|:----------------|------------:|
+| P-256           |    7.74e-15 |
+| mlkem512        |    2.26e-12 |
+| p256_mlkem512   |    2.8e-17  |
+| x25519          |    1.51e-11 |
+| x25519_mlkem512 |    1.58e-25 |
+
+**Levene's test p-value:** 5.89e-172
+
+**Kruskal–Wallis p = 2.59e-289
+
+**Pairwise Mann–Whitney (p-values):**
+| KEM1          | KEM2            |   p-value |
+|:--------------|:----------------|----------:|
+| P-256         | mlkem512        |      0.78 |
+| P-256         | p256_mlkem512   |      0    |
+| P-256         | x25519          |      0    |
+| P-256         | x25519_mlkem512 |      0.61 |
+| mlkem512      | p256_mlkem512   |      0    |
+| mlkem512      | x25519          |      0    |
+| mlkem512      | x25519_mlkem512 |      0.37 |
+| p256_mlkem512 | x25519          |      0    |
+| p256_mlkem512 | x25519_mlkem512 |      0    |
+| x25519        | x25519_mlkem512 |      0    |
+
+**Pairwise t-tests (p-values):**
+| KEM1          | KEM2            |   p-value |
+|:--------------|:----------------|----------:|
+| P-256         | mlkem512        |  0.981    |
+| P-256         | p256_mlkem512   |  0        |
+| P-256         | x25519          |  3.26e-32 |
+| P-256         | x25519_mlkem512 |  0.604    |
+| mlkem512      | p256_mlkem512   |  0        |
+| mlkem512      | x25519          |  1.28e-34 |
+| mlkem512      | x25519_mlkem512 |  0.608    |
+| p256_mlkem512 | x25519          |  0        |
+| p256_mlkem512 | x25519_mlkem512 |  0        |
+| x25519        | x25519_mlkem512 |  7.4e-31  |
+
+Level 3 – QUIC
+
+**Descriptive statistics (with Outlier count):**
+| KEM           |   Mean |   DesvStd |   Median |   Min |   Max |   Outliers |
+|:--------------|-------:|----------:|---------:|------:|------:|-----------:|
+| P-384         |   6.93 |      1.09 |     6.30 |  5.99 | 11.06 |          3 |
+| mlkem768      |   3.96 |      0.43 |     3.85 |  3.49 |  6.46 |         51 |
+| p384_mlkem768 |  14.73 |      1.18 |    14.34 | 13.87 | 22.95 |         67 |
+| x448          |   5.09 |      0.71 |     4.77 |  4.42 |  8.27 |         41 |
+| x448_mlkem768 |   7.29 |      0.67 |     7.07 |  6.72 | 10.91 |         67 |
+
+**Shapiro–Wilk (p-valores):**
+| KEM           |   Shapiro_p |
+|:--------------|------------:|
+| P-384         |    5.28e-27 |
+| mlkem768      |    3.16e-28 |
+| p384_mlkem768 |    9.93e-34 |
+| x448          |    4.07e-27 |
+| x448_mlkem768 |    6.25e-31 |
+
+**Levene's test p-value:** 2.59e-22
+
+**Kruskal–Wallis p = 0.00e+00
+
+**Pairwise Mann–Whitney (p-values):**
+| KEM1          | KEM2          |   p-value |
+|:--------------|:--------------|----------:|
+| P-384         | mlkem768      |         0 |
+| P-384         | p384_mlkem768 |         0 |
+| P-384         | x448          |         0 |
+| P-384         | x448_mlkem768 |         0 |
+| mlkem768      | p384_mlkem768 |         0 |
+| mlkem768      | x448          |         0 |
+| mlkem768      | x448_mlkem768 |         0 |
+| p384_mlkem768 | x448          |         0 |
+| p384_mlkem768 | x448_mlkem768 |         0 |
+| x448          | x448_mlkem768 |         0 |
+
+**Pairwise t-tests (p-values):**
+| KEM1          | KEM2          |   p-value |
+|:--------------|:--------------|----------:|
+| P-384         | mlkem768      | 6.96e-254 |
+| P-384         | p384_mlkem768 | 0         |
+| P-384         | x448          | 4.81e-147 |
+| P-384         | x448_mlkem768 | 4.84e-10  |
+| mlkem768      | p384_mlkem768 | 0         |
+| mlkem768      | x448          | 6.81e-137 |
+| mlkem768      | x448_mlkem768 | 0         |
+| p384_mlkem768 | x448          | 0         |
+| p384_mlkem768 | x448_mlkem768 | 0         |
+| x448          | x448_mlkem768 | 5.21e-277 |
+
+Level 3 – TLS
+
+**Descriptive statistics (with Outlier count):**
+| KEM           |   Mean |   DesvStd |   Median |   Min |     Max |   Outliers |
+|:--------------|-------:|----------:|---------:|------:|--------:|-----------:|
+| P-384         |  11.12 |      1.96 |    10.48 |  8.38 |   17.59 |          2 |
+| mlkem768      |   5.71 |      0.93 |     5.35 |  4.60 |    9.57 |         32 |
+| p384_mlkem768 |  27.31 |    160.25 |    19.66 | 15.42 | 3602.88 |          1 |
+| x448          |   7.09 |      1.16 |     7.02 |  5.15 |   10.86 |          1 |
+| x448_mlkem768 |   8.18 |      1.45 |     7.54 |  6.28 |   13.39 |          6 |
+
+**Shapiro–Wilk (p-valores):**
+| KEM           |   Shapiro_p |
+|:--------------|------------:|
+| P-384         |    3.41e-17 |
+| mlkem768      |    1.11e-23 |
+| p384_mlkem768 |    2.38e-44 |
+| x448          |    7.79e-13 |
+| x448_mlkem768 |    4.96e-19 |
+
+**Levene's test p-value:** 2.12e-01
+
+**Kruskal–Wallis p = 0.00e+00
+
+**Pairwise Mann–Whitney (p-values):**
+| KEM1          | KEM2          |   p-value |
+|:--------------|:--------------|----------:|
+| P-384         | mlkem768      |         0 |
+| P-384         | p384_mlkem768 |         0 |
+| P-384         | x448          |         0 |
+| P-384         | x448_mlkem768 |         0 |
+| mlkem768      | p384_mlkem768 |         0 |
+| mlkem768      | x448          |         0 |
+| mlkem768      | x448_mlkem768 |         0 |
+| p384_mlkem768 | x448          |         0 |
+| p384_mlkem768 | x448_mlkem768 |         0 |
+| x448          | x448_mlkem768 |         0 |
+
+**Pairwise t-tests (p-values):**
+| KEM1          | KEM2          |   p-value |
+|:--------------|:--------------|----------:|
+| P-384         | mlkem768      | 5.82e-308 |
+| P-384         | p384_mlkem768 | 0.0241    |
+| P-384         | x448          | 2.5e-206  |
+| P-384         | x448_mlkem768 | 1.59e-120 |
+| mlkem768      | p384_mlkem768 | 0.00265   |
+| mlkem768      | x448          | 1.2e-78   |
+| mlkem768      | x448_mlkem768 | 1.64e-154 |
+| p384_mlkem768 | x448          | 0.00488   |
+| p384_mlkem768 | x448_mlkem768 | 0.00774   |
+| x448          | x448_mlkem768 | 2.45e-36  |
+
+Level 5 – QUIC
+
+**Descriptive statistics (with Outlier count):**
+| KEM            |   Mean |   DesvStd |   Median |   Min |   Max |   Outliers |
+|:---------------|-------:|----------:|---------:|------:|------:|-----------:|
+| P-521          |   6.33 |      0.81 |     6.05 |  5.60 | 10.25 |         65 |
+| mlkem1024      |   4.67 |      0.68 |     4.34 |  3.84 |  6.80 |         57 |
+| p521_mlkem1024 |  14.99 |      1.78 |    14.46 | 13.57 | 22.86 |         59 |
+
+**Shapiro–Wilk (p-valores):**
+| KEM            |   Shapiro_p |
+|:---------------|------------:|
+| P-521          |    1.55e-28 |
+| mlkem1024      |    5.31e-26 |
+| p521_mlkem1024 |    2.33e-31 |
+
+**Levene's test p-value:** 1.52e-15
+
+**Kruskal–Wallis p = 1.17e-271
+
+**Pairwise Mann–Whitney (p-values):**
+| KEM1      | KEM2           |   p-value |
+|:----------|:---------------|----------:|
+| P-521     | mlkem1024      |         0 |
+| P-521     | p521_mlkem1024 |         0 |
+| mlkem1024 | p521_mlkem1024 |         0 |
+
+**Pairwise t-tests (p-values):**
+| KEM1      | KEM2           |   p-value |
+|:----------|:---------------|----------:|
+| P-521     | mlkem1024      | 3.83e-174 |
+| P-521     | p521_mlkem1024 | 0         |
+| mlkem1024 | p521_mlkem1024 | 0         |
+
+Level 5 – TLS
+
+**Descriptive statistics (with Outlier count):**
+| KEM            |   Mean |   DesvStd |   Median |   Min |   Max |   Outliers |
+|:---------------|-------:|----------:|---------:|------:|------:|-----------:|
+| P-521          |  22.16 |      3.50 |    20.56 | 18.09 | 33.94 |          6 |
+| mlkem1024      |  11.09 |      2.06 |    10.18 |  8.68 | 19.63 |          2 |
+| p521_mlkem1024 |  32.96 |      4.66 |    32.01 | 26.56 | 50.00 |          3 |
+
+**Shapiro–Wilk (p-valores):**
+| KEM            |   Shapiro_p |
+|:---------------|------------:|
+| P-521          |    2.46e-21 |
+| mlkem1024      |    2.16e-19 |
+| p521_mlkem1024 |    4.37e-15 |
+
+**Levene's test p-value:** 8.82e-40
+
+**Kruskal–Wallis p = 1.48e-281
+
+**Pairwise Mann–Whitney (p-values):**
+| KEM1      | KEM2           |   p-value |
+|:----------|:---------------|----------:|
+| P-521     | mlkem1024      |         0 |
+| P-521     | p521_mlkem1024 |         0 |
+| mlkem1024 | p521_mlkem1024 |         0 |
+
+**Pairwise t-tests (p-values):**
+| KEM1      | KEM2           |   p-value |
+|:----------|:---------------|----------:|
+| P-521     | mlkem1024      | 2.68e-304 |
+| P-521     | p521_mlkem1024 | 4.34e-213 |
+| mlkem1024 | p521_mlkem1024 | 0         |
+
+=== Cross-Level ANOVA (Loss=0%) ===
+
+=== TLS vs QUIC Comparisons (Loss=0%) ===
+Level 1 – P-256: TLS vs QUIC p=0.000
+Level 1 – mlkem512: TLS vs QUIC p=0.000
+Level 1 – p256_mlkem512: TLS vs QUIC p=0.000
+Level 1 – x25519: TLS vs QUIC p=0.000
+Level 1 – x25519_mlkem512: TLS vs QUIC p=0.000
+Level 3 – P-384: TLS vs QUIC p=0.000
+Level 3 – mlkem768: TLS vs QUIC p=0.000
+Level 3 – p384_mlkem768: TLS vs QUIC p=0.080
+Level 3 – x448: TLS vs QUIC p=0.000
+Level 3 – x448_mlkem768: TLS vs QUIC p=0.000
+Level 5 – P-521: TLS vs QUIC p=0.000
+Level 5 – mlkem1024: TLS vs QUIC p=0.000
+Level 5 – p521_mlkem1024: TLS vs QUIC p=0.000
+
+=== Per-Level KEM Comparisons (Loss=5%) ===
+
+Level 1 – QUIC
+
+**Descriptive statistics (with Outlier count):**
+| KEM             |   Mean |   DesvStd |   Median |   Min |     Max |   Outliers |
+|:----------------|-------:|----------:|---------:|------:|--------:|-----------:|
+| P-256           |  52.60 |    218.14 |     2.48 |  2.12 | 1003.41 |         49 |
+| mlkem512        |  59.03 |    256.31 |     2.76 |  2.18 | 3001.15 |         25 |
+| p256_mlkem512   |  54.57 |    202.08 |    11.76 | 10.01 | 1042.19 |         21 |
+| x25519          |  42.52 |    225.81 |     2.58 |  1.89 | 3000.10 |         21 |
+| x25519_mlkem512 |  38.25 |    180.12 |     4.71 |  3.70 | 1033.30 |         16 |
+
+**Shapiro–Wilk (p-valores):**
+| KEM             |   Shapiro_p |
+|:----------------|------------:|
+| P-256           |    1        |
+| mlkem512        |    1.51e-40 |
+| p256_mlkem512   |    1        |
+| x25519          |    1        |
+| x25519_mlkem512 |    2.33e-41 |
+
+**Levene's test p-value:** nan
+
+**Kruskal–Wallis p = nan
+
+**Pairwise Mann–Whitney (p-values):**
+| KEM1          | KEM2            |   p-value |
+|:--------------|:----------------|----------:|
+| P-256         | mlkem512        |       nan |
+| P-256         | p256_mlkem512   |       nan |
+| P-256         | x25519          |       nan |
+| P-256         | x25519_mlkem512 |       nan |
+| mlkem512      | p256_mlkem512   |       nan |
+| mlkem512      | x25519          |       nan |
+| mlkem512      | x25519_mlkem512 |         0 |
+| p256_mlkem512 | x25519          |       nan |
+| p256_mlkem512 | x25519_mlkem512 |       nan |
+| x25519        | x25519_mlkem512 |       nan |
+
+**Pairwise t-tests (p-values):**
+| KEM1          | KEM2            |   p-value |
+|:--------------|:----------------|----------:|
+| P-256         | mlkem512        |   nan     |
+| P-256         | p256_mlkem512   |   nan     |
+| P-256         | x25519          |   nan     |
+| P-256         | x25519_mlkem512 |   nan     |
+| mlkem512      | p256_mlkem512   |   nan     |
+| mlkem512      | x25519          |   nan     |
+| mlkem512      | x25519_mlkem512 |     0.146 |
+| p256_mlkem512 | x25519          |   nan     |
+| p256_mlkem512 | x25519_mlkem512 |   nan     |
+| x25519        | x25519_mlkem512 |   nan     |
+
+Level 1 – TLS
+
+**Descriptive statistics (with Outlier count):**
+| KEM             |   Mean |   DesvStd |   Median |   Min |     Max |   Outliers |
+|:----------------|-------:|----------:|---------:|------:|--------:|-----------:|
+| P-256           |  67.44 |    299.97 |     1.99 |  1.54 | 4639.99 |         56 |
+| mlkem512        |  87.40 |    333.31 |     2.15 |  1.73 | 4606.93 |         74 |
+| p256_mlkem512   |  63.74 |    293.05 |     8.09 |  7.06 | 4640.44 |         75 |
+| x25519          |   1.88 |      0.23 |     1.85 |  1.48 |    3.08 |         29 |
+| x25519_mlkem512 |  65.11 |    300.58 |     2.31 |  1.92 | 4643.21 |         47 |
+
+**Shapiro–Wilk (p-valores):**
+| KEM             |   Shapiro_p |
+|:----------------|------------:|
+| P-256           |    3.55e-41 |
+| mlkem512        |    3.19e-40 |
+| p256_mlkem512   |    7.81e-42 |
+| x25519          |    9.85e-14 |
+| x25519_mlkem512 |    2.07e-41 |
+
+**Levene's test p-value:** 1.94e-05
+
+**Kruskal–Wallis p = 1.08e-300
+
+**Pairwise Mann–Whitney (p-values):**
+| KEM1          | KEM2            |   p-value |
+|:--------------|:----------------|----------:|
+| P-256         | mlkem512        |         0 |
+| P-256         | p256_mlkem512   |         0 |
+| P-256         | x25519          |         0 |
+| P-256         | x25519_mlkem512 |         0 |
+| mlkem512      | p256_mlkem512   |         0 |
+| mlkem512      | x25519          |         0 |
+| mlkem512      | x25519_mlkem512 |         0 |
+| p256_mlkem512 | x25519          |         0 |
+| p256_mlkem512 | x25519_mlkem512 |         0 |
+| x25519        | x25519_mlkem512 |         0 |
+
+**Pairwise t-tests (p-values):**
+| KEM1          | KEM2            |   p-value |
+|:--------------|:----------------|----------:|
+| P-256         | mlkem512        |  0.32     |
+| P-256         | p256_mlkem512   |  0.844    |
+| P-256         | x25519          |  1.38e-06 |
+| P-256         | x25519_mlkem512 |  0.902    |
+| mlkem512      | p256_mlkem512   |  0.234    |
+| mlkem512      | x25519          |  1.67e-08 |
+| mlkem512      | x25519_mlkem512 |  0.267    |
+| p256_mlkem512 | x25519          |  3.07e-06 |
+| p256_mlkem512 | x25519_mlkem512 |  0.942    |
+| x25519        | x25519_mlkem512 |  3.31e-06 |
+
+Level 3 – QUIC
+
+**Descriptive statistics (with Outlier count):**
+| KEM           |   Mean |   DesvStd |   Median |   Min |     Max |   Outliers |
+|:--------------|-------:|----------:|---------:|------:|--------:|-----------:|
+| P-384         |  70.08 |    291.12 |     6.47 |  5.78 | 3005.78 |         58 |
+| mlkem768      |  51.30 |    211.37 |     4.27 |  3.63 | 1005.65 |         40 |
+| p384_mlkem768 |  61.01 |    206.59 |    15.76 | 13.86 | 1033.32 |         26 |
+| x448          |  59.42 |    252.91 |     4.87 |  4.28 | 3003.00 |         32 |
+| x448_mlkem768 |  65.66 |    234.73 |     7.34 |  6.69 | 1033.83 |         54 |
+
+**Shapiro–Wilk (p-valores):**
+| KEM           |   Shapiro_p |
+|:--------------|------------:|
+| P-384         |    1        |
+| mlkem768      |    1        |
+| p384_mlkem768 |    1        |
+| x448          |    1.45e-40 |
+| x448_mlkem768 |    1        |
+
+**Levene's test p-value:** nan
+
+**Kruskal–Wallis p = nan
+
+**Pairwise Mann–Whitney (p-values):**
+| KEM1          | KEM2          |   p-value |
+|:--------------|:--------------|----------:|
+| P-384         | mlkem768      |       nan |
+| P-384         | p384_mlkem768 |       nan |
+| P-384         | x448          |       nan |
+| P-384         | x448_mlkem768 |       nan |
+| mlkem768      | p384_mlkem768 |       nan |
+| mlkem768      | x448          |       nan |
+| mlkem768      | x448_mlkem768 |       nan |
+| p384_mlkem768 | x448          |       nan |
+| p384_mlkem768 | x448_mlkem768 |       nan |
+| x448          | x448_mlkem768 |       nan |
+
+**Pairwise t-tests (p-values):**
+| KEM1          | KEM2          |   p-value |
+|:--------------|:--------------|----------:|
+| P-384         | mlkem768      |       nan |
+| P-384         | p384_mlkem768 |       nan |
+| P-384         | x448          |       nan |
+| P-384         | x448_mlkem768 |       nan |
+| mlkem768      | p384_mlkem768 |       nan |
+| mlkem768      | x448          |       nan |
+| mlkem768      | x448_mlkem768 |       nan |
+| p384_mlkem768 | x448          |       nan |
+| p384_mlkem768 | x448_mlkem768 |       nan |
+| x448          | x448_mlkem768 |       nan |
+
+Level 3 – TLS
+
+**Descriptive statistics (with Outlier count):**
+| KEM           |   Mean |   DesvStd |   Median |   Min |     Max |   Outliers |
+|:--------------|-------:|----------:|---------:|------:|--------:|-----------:|
+| P-384         |  83.79 |    309.67 |     9.09 |  8.38 | 4598.10 |         82 |
+| mlkem768      |  61.03 |    296.31 |     5.05 |  4.46 | 4609.01 |         72 |
+| p384_mlkem768 |  87.69 |    345.69 |    16.33 | 15.04 | 4651.00 |         62 |
+| x448          |  65.51 |    263.57 |     5.40 |  4.98 | 3795.07 |         78 |
+| x448_mlkem768 |  46.45 |    194.94 |     6.61 |  6.07 | 1251.72 |         81 |
+
+**Shapiro–Wilk (p-valores):**
+| KEM           |   Shapiro_p |
+|:--------------|------------:|
+| P-384         |    1.19e-40 |
+| mlkem768      |    7.55e-42 |
+| p384_mlkem768 |    2.18e-41 |
+| x448          |    6.41e-41 |
+| x448_mlkem768 |    1.55e-41 |
+
+**Levene's test p-value:** 3.16e-01
+
+**Kruskal–Wallis p = 0.00e+00
+
+**Pairwise Mann–Whitney (p-values):**
+| KEM1          | KEM2          |   p-value |
+|:--------------|:--------------|----------:|
+| P-384         | mlkem768      |         0 |
+| P-384         | p384_mlkem768 |         0 |
+| P-384         | x448          |         0 |
+| P-384         | x448_mlkem768 |         0 |
+| mlkem768      | p384_mlkem768 |         0 |
+| mlkem768      | x448          |         0 |
+| mlkem768      | x448_mlkem768 |         0 |
+| p384_mlkem768 | x448          |         0 |
+| p384_mlkem768 | x448_mlkem768 |         0 |
+| x448          | x448_mlkem768 |         0 |
+
+**Pairwise t-tests (p-values):**
+| KEM1          | KEM2          |   p-value |
+|:--------------|:--------------|----------:|
+| P-384         | mlkem768      |    0.235  |
+| P-384         | p384_mlkem768 |    0.851  |
+| P-384         | x448          |    0.315  |
+| P-384         | x448_mlkem768 |    0.0227 |
+| mlkem768      | p384_mlkem768 |    0.191  |
+| mlkem768      | x448          |    0.801  |
+| mlkem768      | x448_mlkem768 |    0.358  |
+| p384_mlkem768 | x448          |    0.254  |
+| p384_mlkem768 | x448_mlkem768 |    0.0203 |
+| x448          | x448_mlkem768 |    0.194  |
+
+Level 5 – QUIC
+
+**Descriptive statistics (with Outlier count):**
+| KEM            |   Mean |   DesvStd |   Median |   Min |     Max |   Outliers |
+|:---------------|-------:|----------:|---------:|------:|--------:|-----------:|
+| P-521          |  70.18 |    290.99 |     6.53 |  5.69 | 3005.14 |         28 |
+| mlkem1024      |  36.06 |    175.70 |     4.38 |  3.76 | 1031.51 |         40 |
+| p521_mlkem1024 |  78.06 |    264.97 |    16.38 | 13.84 | 3023.13 |         27 |
+
+**Shapiro–Wilk (p-valores):**
+| KEM            |   Shapiro_p |
+|:---------------|------------:|
+| P-521          |    1        |
+| mlkem1024      |    1.72e-41 |
+| p521_mlkem1024 |    1        |
+
+**Levene's test p-value:** nan
+
+**Kruskal–Wallis p = nan
+
+**Pairwise Mann–Whitney (p-values):**
+| KEM1      | KEM2           |   p-value |
+|:----------|:---------------|----------:|
+| P-521     | mlkem1024      |       nan |
+| P-521     | p521_mlkem1024 |       nan |
+| mlkem1024 | p521_mlkem1024 |       nan |
+
+**Pairwise t-tests (p-values):**
+| KEM1      | KEM2           |   p-value |
+|:----------|:---------------|----------:|
+| P-521     | mlkem1024      |       nan |
+| P-521     | p521_mlkem1024 |       nan |
+| mlkem1024 | p521_mlkem1024 |       nan |
+
+Level 5 – TLS
+
+**Descriptive statistics (with Outlier count):**
+| KEM            |   Mean |   DesvStd |   Median |   Min |     Max |   Outliers |
+|:---------------|-------:|----------:|---------:|------:|--------:|-----------:|
+| P-521          | 102.39 |    339.12 |    18.80 | 17.79 | 3805.87 |         77 |
+| mlkem1024      |  70.21 |    302.78 |     8.78 |  8.26 | 4647.37 |         65 |
+| p521_mlkem1024 |  79.13 |    288.47 |    27.40 | 26.04 | 4622.32 |         48 |
+
+**Shapiro–Wilk (p-valores):**
+| KEM            |   Shapiro_p |
+|:---------------|------------:|
+| P-521          |    1.74e-40 |
+| mlkem1024      |    1.46e-41 |
+| p521_mlkem1024 |    4.66e-42 |
+
+**Levene's test p-value:** 2.56e-01
+
+**Kruskal–Wallis p = 9.65e-218
+
+**Pairwise Mann–Whitney (p-values):**
+| KEM1      | KEM2           |   p-value |
+|:----------|:---------------|----------:|
+| P-521     | mlkem1024      |         0 |
+| P-521     | p521_mlkem1024 |         0 |
+| mlkem1024 | p521_mlkem1024 |         0 |
+
+**Pairwise t-tests (p-values):**
+| KEM1      | KEM2           |   p-value |
+|:----------|:---------------|----------:|
+| P-521     | mlkem1024      |     0.114 |
+| P-521     | p521_mlkem1024 |     0.243 |
+| mlkem1024 | p521_mlkem1024 |     0.633 |
+
+=== Cross-Level ANOVA (Loss=5%) ===
+
+=== TLS vs QUIC Comparisons (Loss=5%) ===
+Level 1 – P-256: TLS vs QUIC p=nan
+Level 1 – mlkem512: TLS vs QUIC p=0.135
+Level 1 – p256_mlkem512: TLS vs QUIC p=nan
+Level 1 – x25519: TLS vs QUIC p=nan
+Level 1 – x25519_mlkem512: TLS vs QUIC p=0.089
+Level 3 – P-384: TLS vs QUIC p=nan
+Level 3 – mlkem768: TLS vs QUIC p=nan
+Level 3 – p384_mlkem768: TLS vs QUIC p=nan
+Level 3 – x448: TLS vs QUIC p=0.712
+Level 3 – x448_mlkem768: TLS vs QUIC p=nan
+Level 5 – P-521: TLS vs QUIC p=nan
+Level 5 – mlkem1024: TLS vs QUIC p=0.030
+Level 5 – p521_mlkem1024: TLS vs QUIC p=nan
+
+=== Per-Level KEM Comparisons (Loss=10%) ===
+
+Level 1 – QUIC
+
+**Descriptive statistics (with Outlier count):**
+| KEM             |   Mean |   DesvStd |   Median |   Min |     Max |   Outliers |
+|:----------------|-------:|----------:|---------:|------:|--------:|-----------:|
+| P-256           | 115.71 |    408.25 |     2.87 |  2.40 | 3001.75 |         45 |
+| mlkem512        | 140.78 |    415.92 |     2.80 |  2.27 | 3001.55 |         55 |
+| p256_mlkem512   | 101.59 |    287.54 |    11.10 |  9.92 | 1066.47 |         43 |
+| x25519          | 118.54 |    412.79 |     2.50 |  2.12 | 3075.38 |         48 |
+| x25519_mlkem512 |  99.58 |    294.34 |     4.44 |  3.92 | 1087.86 |         45 |
+
+**Shapiro–Wilk (p-valores):**
+| KEM             |   Shapiro_p |
+|:----------------|------------:|
+| P-256           |    1        |
+| mlkem512        |    1        |
+| p256_mlkem512   |    6.85e-38 |
+| x25519          |    1        |
+| x25519_mlkem512 |    1        |
+
+**Levene's test p-value:** nan
+
+**Kruskal–Wallis p = nan
+
+**Pairwise Mann–Whitney (p-values):**
+| KEM1          | KEM2            |   p-value |
+|:--------------|:----------------|----------:|
+| P-256         | mlkem512        |       nan |
+| P-256         | p256_mlkem512   |       nan |
+| P-256         | x25519          |       nan |
+| P-256         | x25519_mlkem512 |       nan |
+| mlkem512      | p256_mlkem512   |       nan |
+| mlkem512      | x25519          |       nan |
+| mlkem512      | x25519_mlkem512 |       nan |
+| p256_mlkem512 | x25519          |       nan |
+| p256_mlkem512 | x25519_mlkem512 |       nan |
+| x25519        | x25519_mlkem512 |       nan |
+
+**Pairwise t-tests (p-values):**
+| KEM1          | KEM2            |   p-value |
+|:--------------|:----------------|----------:|
+| P-256         | mlkem512        |       nan |
+| P-256         | p256_mlkem512   |       nan |
+| P-256         | x25519          |       nan |
+| P-256         | x25519_mlkem512 |       nan |
+| mlkem512      | p256_mlkem512   |       nan |
+| mlkem512      | x25519          |       nan |
+| mlkem512      | x25519_mlkem512 |       nan |
+| p256_mlkem512 | x25519          |       nan |
+| p256_mlkem512 | x25519_mlkem512 |       nan |
+| x25519        | x25519_mlkem512 |       nan |
+
+Level 1 – TLS
+
+**Descriptive statistics (with Outlier count):**
+| KEM             |   Mean |   DesvStd |   Median |   Min |     Max |   Outliers |
+|:----------------|-------:|----------:|---------:|------:|--------:|-----------:|
+| P-256           | 123.24 |    392.16 |     2.02 |  1.58 | 4615.80 |         83 |
+| mlkem512        | 112.59 |    290.74 |     2.11 |  1.71 | 1259.12 |         95 |
+| p256_mlkem512   | 136.67 |    446.34 |     8.12 |  7.19 | 4789.57 |         62 |
+| x25519          |  97.93 |    336.98 |     1.92 |  1.55 | 4621.80 |         83 |
+| x25519_mlkem512 | 128.21 |    349.85 |     2.54 |  2.07 | 3773.14 |         92 |
+
+**Shapiro–Wilk (p-valores):**
+| KEM             |   Shapiro_p |
+|:----------------|------------:|
+| P-256           |    1        |
+| mlkem512        |    3.72e-37 |
+| p256_mlkem512   |    1.88e-39 |
+| x25519          |    1.42e-39 |
+| x25519_mlkem512 |    1        |
+
+**Levene's test p-value:** nan
+
+**Kruskal–Wallis p = nan
+
+**Pairwise Mann–Whitney (p-values):**
+| KEM1          | KEM2            |   p-value |
+|:--------------|:----------------|----------:|
+| P-256         | mlkem512        |       nan |
+| P-256         | p256_mlkem512   |       nan |
+| P-256         | x25519          |       nan |
+| P-256         | x25519_mlkem512 |       nan |
+| mlkem512      | p256_mlkem512   |         0 |
+| mlkem512      | x25519          |         0 |
+| mlkem512      | x25519_mlkem512 |       nan |
+| p256_mlkem512 | x25519          |         0 |
+| p256_mlkem512 | x25519_mlkem512 |       nan |
+| x25519        | x25519_mlkem512 |       nan |
+
+**Pairwise t-tests (p-values):**
+| KEM1          | KEM2            |   p-value |
+|:--------------|:----------------|----------:|
+| P-256         | mlkem512        |   nan     |
+| P-256         | p256_mlkem512   |   nan     |
+| P-256         | x25519          |   nan     |
+| P-256         | x25519_mlkem512 |   nan     |
+| mlkem512      | p256_mlkem512   |     0.312 |
+| mlkem512      | x25519          |     0.461 |
+| mlkem512      | x25519_mlkem512 |   nan     |
+| p256_mlkem512 | x25519          |     0.122 |
+| p256_mlkem512 | x25519_mlkem512 |   nan     |
+| x25519        | x25519_mlkem512 |   nan     |
+
+Level 3 – QUIC
+
+**Descriptive statistics (with Outlier count):**
+| KEM           |   Mean |   DesvStd |   Median |   Min |     Max |   Outliers |
+|:--------------|-------:|----------:|---------:|------:|--------:|-----------:|
+| P-384         | 118.73 |    422.56 |     6.58 |  5.90 | 3006.50 |         44 |
+| mlkem768      |  97.99 |    334.32 |     4.32 |  3.73 | 3002.62 |         40 |
+| p384_mlkem768 | 104.26 |    307.40 |    15.51 | 13.97 | 3015.04 |         42 |
+| x448          | 113.06 |    369.91 |     4.97 |  4.42 | 3003.99 |         43 |
+| x448_mlkem768 | 107.61 |    342.21 |     7.81 |  6.95 | 3007.17 |         41 |
+
+**Shapiro–Wilk (p-valores):**
+| KEM           |   Shapiro_p |
+|:--------------|------------:|
+| P-384         |    1        |
+| mlkem768      |    1        |
+| p384_mlkem768 |    1        |
+| x448          |    1        |
+| x448_mlkem768 |    4.51e-38 |
+
+**Levene's test p-value:** nan
+
+**Kruskal–Wallis p = nan
+
+**Pairwise Mann–Whitney (p-values):**
+| KEM1          | KEM2          |   p-value |
+|:--------------|:--------------|----------:|
+| P-384         | mlkem768      |       nan |
+| P-384         | p384_mlkem768 |       nan |
+| P-384         | x448          |       nan |
+| P-384         | x448_mlkem768 |       nan |
+| mlkem768      | p384_mlkem768 |       nan |
+| mlkem768      | x448          |       nan |
+| mlkem768      | x448_mlkem768 |       nan |
+| p384_mlkem768 | x448          |       nan |
+| p384_mlkem768 | x448_mlkem768 |       nan |
+| x448          | x448_mlkem768 |       nan |
+
+**Pairwise t-tests (p-values):**
+| KEM1          | KEM2          |   p-value |
+|:--------------|:--------------|----------:|
+| P-384         | mlkem768      |       nan |
+| P-384         | p384_mlkem768 |       nan |
+| P-384         | x448          |       nan |
+| P-384         | x448_mlkem768 |       nan |
+| mlkem768      | p384_mlkem768 |       nan |
+| mlkem768      | x448          |       nan |
+| mlkem768      | x448_mlkem768 |       nan |
+| p384_mlkem768 | x448          |       nan |
+| p384_mlkem768 | x448_mlkem768 |       nan |
+| x448          | x448_mlkem768 |       nan |
+
+Level 3 – TLS
+
+**Descriptive statistics (with Outlier count):**
+| KEM           |   Mean |   DesvStd |   Median |   Min |     Max |   Outliers |
+|:--------------|-------:|----------:|---------:|------:|--------:|-----------:|
+| P-384         | 139.42 |    403.30 |     9.06 |  8.37 | 4781.36 |         89 |
+| mlkem768      | 113.88 |    412.07 |     5.29 |  4.47 | 4626.27 |         79 |
+| p384_mlkem768 | 138.45 |    423.49 |    17.05 | 15.36 | 4605.07 |         64 |
+| x448          | 145.41 |    426.09 |     5.83 |  5.21 | 4627.93 |         91 |
+| x448_mlkem768 | 120.65 |    417.35 |     7.06 |  6.24 | 4829.07 |         58 |
+
+**Shapiro–Wilk (p-valores):**
+| KEM           |   Shapiro_p |
+|:--------------|------------:|
+| P-384         |    1.4e-38  |
+| mlkem768      |    4.65e-40 |
+| p384_mlkem768 |    1.55e-39 |
+| x448          |    1        |
+| x448_mlkem768 |    6.63e-40 |
+
+**Levene's test p-value:** nan
+
+**Kruskal–Wallis p = nan
+
+**Pairwise Mann–Whitney (p-values):**
+| KEM1          | KEM2          |   p-value |
+|:--------------|:--------------|----------:|
+| P-384         | mlkem768      |         0 |
+| P-384         | p384_mlkem768 |         0 |
+| P-384         | x448          |       nan |
+| P-384         | x448_mlkem768 |         0 |
+| mlkem768      | p384_mlkem768 |         0 |
+| mlkem768      | x448          |       nan |
+| mlkem768      | x448_mlkem768 |         0 |
+| p384_mlkem768 | x448          |       nan |
+| p384_mlkem768 | x448_mlkem768 |         0 |
+| x448          | x448_mlkem768 |       nan |
+
+**Pairwise t-tests (p-values):**
+| KEM1          | KEM2          |   p-value |
+|:--------------|:--------------|----------:|
+| P-384         | mlkem768      |     0.322 |
+| P-384         | p384_mlkem768 |     0.971 |
+| P-384         | x448          |   nan     |
+| P-384         | x448_mlkem768 |     0.47  |
+| mlkem768      | p384_mlkem768 |     0.353 |
+| mlkem768      | x448          |   nan     |
+| mlkem768      | x448_mlkem768 |     0.796 |
+| p384_mlkem768 | x448          |   nan     |
+| p384_mlkem768 | x448_mlkem768 |     0.503 |
+| x448          | x448_mlkem768 |   nan     |
+
+Level 5 – QUIC
+
+**Descriptive statistics (with Outlier count):**
+| KEM            |   Mean |   DesvStd |   Median |   Min |     Max |   Outliers |
+|:---------------|-------:|----------:|---------:|------:|--------:|-----------:|
+| P-521          | 147.45 |    655.25 |     6.54 |  5.85 | 7003.09 |         43 |
+| mlkem1024      |  97.72 |    292.35 |     4.44 |  3.96 | 1032.61 |         53 |
+| p521_mlkem1024 | 130.57 |    320.61 |    16.03 | 14.13 | 1209.32 |         53 |
+
+**Shapiro–Wilk (p-valores):**
+| KEM            |   Shapiro_p |
+|:---------------|------------:|
+| P-521          |    1        |
+| mlkem1024      |    5.34e-38 |
+| p521_mlkem1024 |    1        |
+
+**Levene's test p-value:** nan
+
+**Kruskal–Wallis p = nan
+
+**Pairwise Mann–Whitney (p-values):**
+| KEM1      | KEM2           |   p-value |
+|:----------|:---------------|----------:|
+| P-521     | mlkem1024      |       nan |
+| P-521     | p521_mlkem1024 |       nan |
+| mlkem1024 | p521_mlkem1024 |       nan |
+
+**Pairwise t-tests (p-values):**
+| KEM1      | KEM2           |   p-value |
+|:----------|:---------------|----------:|
+| P-521     | mlkem1024      |       nan |
+| P-521     | p521_mlkem1024 |       nan |
+| mlkem1024 | p521_mlkem1024 |       nan |
+
+Level 5 – TLS
+
+**Descriptive statistics (with Outlier count):**
+| KEM            |   Mean |   DesvStd |   Median |   Min |     Max |   Outliers |
+|:---------------|-------:|----------:|---------:|------:|--------:|-----------:|
+| P-521          | 155.78 |    458.10 |    20.08 | 18.12 | 4648.64 |         86 |
+| mlkem1024      | 142.13 |    410.09 |     9.26 |  8.36 | 4578.67 |         71 |
+| p521_mlkem1024 | 157.03 |    447.52 |    28.50 | 26.39 | 4631.31 |         65 |
+
+**Shapiro–Wilk (p-valores):**
+| KEM            |   Shapiro_p |
+|:---------------|------------:|
+| P-521          |    2.21e-39 |
+| mlkem1024      |    1.25e-38 |
+| p521_mlkem1024 |    1.69e-39 |
+
+**Levene's test p-value:** 9.66e-01
+
+**Kruskal–Wallis p = 2.17e-158
+
+**Pairwise Mann–Whitney (p-values):**
+| KEM1      | KEM2           |   p-value |
+|:----------|:---------------|----------:|
+| P-521     | mlkem1024      |         0 |
+| P-521     | p521_mlkem1024 |         0 |
+| mlkem1024 | p521_mlkem1024 |         0 |
+
+**Pairwise t-tests (p-values):**
+| KEM1      | KEM2           |   p-value |
+|:----------|:---------------|----------:|
+| P-521     | mlkem1024      |     0.62  |
+| P-521     | p521_mlkem1024 |     0.965 |
+| mlkem1024 | p521_mlkem1024 |     0.583 |
+
+=== Cross-Level ANOVA (Loss=10%) ===
+
+=== TLS vs QUIC Comparisons (Loss=10%) ===
+Level 1 – P-256: TLS vs QUIC p=nan
+Level 1 – mlkem512: TLS vs QUIC p=nan
+Level 1 – p256_mlkem512: TLS vs QUIC p=0.145
+Level 1 – x25519: TLS vs QUIC p=nan
+Level 1 – x25519_mlkem512: TLS vs QUIC p=nan
+Level 3 – P-384: TLS vs QUIC p=nan
+Level 3 – mlkem768: TLS vs QUIC p=nan
+Level 3 – p384_mlkem768: TLS vs QUIC p=nan
+Level 3 – x448: TLS vs QUIC p=nan
+Level 3 – x448_mlkem768: TLS vs QUIC p=0.596
+Level 5 – P-521: TLS vs QUIC p=nan
+Level 5 – mlkem1024: TLS vs QUIC p=0.052
+Level 5 – p521_mlkem1024: TLS vs QUIC p=nan
+
+=== Per-Level KEM Comparisons (Loss=20%) ===
+
+Level 1 – QUIC
+
+**Descriptive statistics (with Outlier count):**
+| KEM             |   Mean |   DesvStd |   Median |   Min |     Max |   Outliers |
+|:----------------|-------:|----------:|---------:|------:|--------:|-----------:|
+| P-256           | 293.76 |    731.79 |     2.83 |  2.21 | 6998.79 |         81 |
+| mlkem512        | 281.66 |    596.06 |     2.52 |  2.07 | 3001.40 |         92 |
+| p256_mlkem512   | 210.48 |    439.57 |    11.23 |  9.65 | 3008.65 |         77 |
+| x25519          | 275.88 |    756.69 |     2.35 |  1.96 | 6996.64 |         77 |
+| x25519_mlkem512 | 248.15 |    557.78 |     4.24 |  3.67 | 3003.58 |         78 |
+
+**Shapiro–Wilk (p-valores):**
+| KEM             |   Shapiro_p |
+|:----------------|------------:|
+| P-256           |    1        |
+| mlkem512        |    1        |
+| p256_mlkem512   |    5.03e-33 |
+| x25519          |    1        |
+| x25519_mlkem512 |    1        |
+
+**Levene's test p-value:** nan
+
+**Kruskal–Wallis p = nan
+
+**Pairwise Mann–Whitney (p-values):**
+| KEM1          | KEM2            |   p-value |
+|:--------------|:----------------|----------:|
+| P-256         | mlkem512        |       nan |
+| P-256         | p256_mlkem512   |       nan |
+| P-256         | x25519          |       nan |
+| P-256         | x25519_mlkem512 |       nan |
+| mlkem512      | p256_mlkem512   |       nan |
+| mlkem512      | x25519          |       nan |
+| mlkem512      | x25519_mlkem512 |       nan |
+| p256_mlkem512 | x25519          |       nan |
+| p256_mlkem512 | x25519_mlkem512 |       nan |
+| x25519        | x25519_mlkem512 |       nan |
+
+**Pairwise t-tests (p-values):**
+| KEM1          | KEM2            |   p-value |
+|:--------------|:----------------|----------:|
+| P-256         | mlkem512        |       nan |
+| P-256         | p256_mlkem512   |       nan |
+| P-256         | x25519          |       nan |
+| P-256         | x25519_mlkem512 |       nan |
+| mlkem512      | p256_mlkem512   |       nan |
+| mlkem512      | x25519          |       nan |
+| mlkem512      | x25519_mlkem512 |       nan |
+| p256_mlkem512 | x25519          |       nan |
+| p256_mlkem512 | x25519_mlkem512 |       nan |
+| x25519        | x25519_mlkem512 |       nan |
+
+Level 1 – TLS
+
+**Descriptive statistics (with Outlier count):**
+| KEM             |   Mean |   DesvStd |   Median |   Min |     Max |   Outliers |
+|:----------------|-------:|----------:|---------:|------:|--------:|-----------:|
+| P-256           | 266.18 |    592.08 |     2.02 |  1.54 | 4846.90 |         90 |
+| mlkem512        | 289.96 |    575.76 |     2.16 |  1.69 | 4838.61 |        100 |
+| p256_mlkem512   | 341.97 |    679.83 |     8.46 |  7.17 | 5043.90 |         12 |
+| x25519          | 272.50 |    598.89 |     1.87 |  1.41 | 4648.68 |         94 |
+| x25519_mlkem512 | 289.17 |    591.60 |     2.39 |  1.97 | 5042.09 |        100 |
+
+**Shapiro–Wilk (p-valores):**
+| KEM             |   Shapiro_p |
+|:----------------|------------:|
+| P-256           |    1.36e-35 |
+| mlkem512        |    3.84e-34 |
+| p256_mlkem512   |    2.24e-34 |
+| x25519          |    2.55e-35 |
+| x25519_mlkem512 |    1.7e-34  |
+
+**Levene's test p-value:** 4.03e-01
+
+**Kruskal–Wallis p = 2.77e-91
+
+**Pairwise Mann–Whitney (p-values):**
+| KEM1          | KEM2            |   p-value |
+|:--------------|:----------------|----------:|
+| P-256         | mlkem512        |         0 |
+| P-256         | p256_mlkem512   |         0 |
+| P-256         | x25519          |         0 |
+| P-256         | x25519_mlkem512 |         0 |
+| mlkem512      | p256_mlkem512   |         0 |
+| mlkem512      | x25519          |         0 |
+| mlkem512      | x25519_mlkem512 |         0 |
+| p256_mlkem512 | x25519          |         0 |
+| p256_mlkem512 | x25519_mlkem512 |         0 |
+| x25519        | x25519_mlkem512 |         0 |
+
+**Pairwise t-tests (p-values):**
+| KEM1          | KEM2            |   p-value |
+|:--------------|:----------------|----------:|
+| P-256         | mlkem512        |    0.52   |
+| P-256         | p256_mlkem512   |    0.0604 |
+| P-256         | x25519          |    0.867  |
+| P-256         | x25519_mlkem512 |    0.539  |
+| mlkem512      | p256_mlkem512   |    0.192  |
+| mlkem512      | x25519          |    0.638  |
+| mlkem512      | x25519_mlkem512 |    0.983  |
+| p256_mlkem512 | x25519          |    0.0867 |
+| p256_mlkem512 | x25519_mlkem512 |    0.19   |
+| x25519        | x25519_mlkem512 |    0.658  |
+
+Level 3 – QUIC
+
+**Descriptive statistics (with Outlier count):**
+| KEM           |   Mean |   DesvStd |   Median |   Min |     Max |   Outliers |
+|:--------------|-------:|----------:|---------:|------:|--------:|-----------:|
+| P-384         | 370.46 |   1086.03 |     6.40 |  5.84 | 7001.88 |         76 |
+| mlkem768      | 186.06 |    405.00 |     4.09 |  3.58 | 3002.21 |         76 |
+| p384_mlkem768 | 236.99 |    489.00 |    15.75 | 14.05 | 3028.75 |         75 |
+| x448          | 237.79 |    682.01 |     4.71 |  4.23 | 6999.69 |         67 |
+| x448_mlkem768 | 202.71 |    438.14 |     7.39 |  6.64 | 3005.80 |         76 |
+
+**Shapiro–Wilk (p-valores):**
+| KEM           |   Shapiro_p |
+|:--------------|------------:|
+| P-384         |    1        |
+| mlkem768      |    1        |
+| p384_mlkem768 |    1        |
+| x448          |    1        |
+| x448_mlkem768 |    3.87e-33 |
+
+**Levene's test p-value:** nan
+
+**Kruskal–Wallis p = nan
+
+**Pairwise Mann–Whitney (p-values):**
+| KEM1          | KEM2          |   p-value |
+|:--------------|:--------------|----------:|
+| P-384         | mlkem768      |       nan |
+| P-384         | p384_mlkem768 |       nan |
+| P-384         | x448          |       nan |
+| P-384         | x448_mlkem768 |       nan |
+| mlkem768      | p384_mlkem768 |       nan |
+| mlkem768      | x448          |       nan |
+| mlkem768      | x448_mlkem768 |       nan |
+| p384_mlkem768 | x448          |       nan |
+| p384_mlkem768 | x448_mlkem768 |       nan |
+| x448          | x448_mlkem768 |       nan |
+
+**Pairwise t-tests (p-values):**
+| KEM1          | KEM2          |   p-value |
+|:--------------|:--------------|----------:|
+| P-384         | mlkem768      |       nan |
+| P-384         | p384_mlkem768 |       nan |
+| P-384         | x448          |       nan |
+| P-384         | x448_mlkem768 |       nan |
+| mlkem768      | p384_mlkem768 |       nan |
+| mlkem768      | x448          |       nan |
+| mlkem768      | x448_mlkem768 |       nan |
+| p384_mlkem768 | x448          |       nan |
+| p384_mlkem768 | x448_mlkem768 |       nan |
+| x448          | x448_mlkem768 |       nan |
+
+Level 3 – TLS
+
+**Descriptive statistics (with Outlier count):**
+| KEM           |   Mean |   DesvStd |   Median |   Min |     Max |   Outliers |
+|:--------------|-------:|----------:|---------:|------:|--------:|-----------:|
+| P-384         | 291.31 |    572.71 |     9.52 |  8.43 | 5673.12 |         99 |
+| mlkem768      | 277.06 |    664.43 |     5.17 |  4.44 | 5364.03 |        122 |
+| p384_mlkem768 | 359.24 |    684.40 |    17.17 | 15.34 | 4640.85 |         10 |
+| x448          | 311.85 |    603.45 |     5.78 |  5.08 | 4835.88 |        107 |
+| x448_mlkem768 | 280.13 |    620.77 |     6.78 |  6.11 | 5427.85 |        102 |
+
+**Shapiro–Wilk (p-valores):**
+| KEM           |   Shapiro_p |
+|:--------------|------------:|
+| P-384         |    1.59e-34 |
+| mlkem768      |    2.83e-36 |
+| p384_mlkem768 |    2.48e-34 |
+| x448          |    6.99e-34 |
+| x448_mlkem768 |    1.04e-35 |
+
+**Levene's test p-value:** 3.44e-01
+
+**Kruskal–Wallis p = 1.60e-122
+
+**Pairwise Mann–Whitney (p-values):**
+| KEM1          | KEM2          |   p-value |
+|:--------------|:--------------|----------:|
+| P-384         | mlkem768      |         0 |
+| P-384         | p384_mlkem768 |         0 |
+| P-384         | x448          |         0 |
+| P-384         | x448_mlkem768 |         0 |
+| mlkem768      | p384_mlkem768 |         0 |
+| mlkem768      | x448          |         0 |
+| mlkem768      | x448_mlkem768 |         0 |
+| p384_mlkem768 | x448          |         0 |
+| p384_mlkem768 | x448_mlkem768 |         0 |
+| x448          | x448_mlkem768 |         0 |
+
+**Pairwise t-tests (p-values):**
+| KEM1          | KEM2          |   p-value |
+|:--------------|:--------------|----------:|
+| P-384         | mlkem768      |    0.716  |
+| P-384         | p384_mlkem768 |    0.0891 |
+| P-384         | x448          |    0.581  |
+| P-384         | x448_mlkem768 |    0.767  |
+| mlkem768      | p384_mlkem768 |    0.0543 |
+| mlkem768      | x448          |    0.386  |
+| mlkem768      | x448_mlkem768 |    0.94   |
+| p384_mlkem768 | x448          |    0.246  |
+| p384_mlkem768 | x448_mlkem768 |    0.0558 |
+| x448          | x448_mlkem768 |    0.413  |
+
+Level 5 – QUIC
+
+**Descriptive statistics (with Outlier count):**
+| KEM            |   Mean |   DesvStd |   Median |   Min |     Max |   Outliers |
+|:---------------|-------:|----------:|---------:|------:|--------:|-----------:|
+| P-521          | 360.76 |    915.80 |     6.86 |  5.73 | 7002.84 |         85 |
+| mlkem1024      | 186.92 |    427.83 |     4.59 |  3.96 | 3030.96 |         67 |
+| p521_mlkem1024 | 253.16 |    497.96 |    15.02 | 13.44 | 3214.93 |         88 |
+
+**Shapiro–Wilk (p-valores):**
+| KEM            |   Shapiro_p |
+|:---------------|------------:|
+| P-521          |    1        |
+| mlkem1024      |    1        |
+| p521_mlkem1024 |    2.64e-32 |
+
+**Levene's test p-value:** nan
+
+**Kruskal–Wallis p = nan
+
+**Pairwise Mann–Whitney (p-values):**
+| KEM1      | KEM2           |   p-value |
+|:----------|:---------------|----------:|
+| P-521     | mlkem1024      |       nan |
+| P-521     | p521_mlkem1024 |       nan |
+| mlkem1024 | p521_mlkem1024 |       nan |
+
+**Pairwise t-tests (p-values):**
+| KEM1      | KEM2           |   p-value |
+|:----------|:---------------|----------:|
+| P-521     | mlkem1024      |       nan |
+| P-521     | p521_mlkem1024 |       nan |
+| mlkem1024 | p521_mlkem1024 |       nan |
+
+Level 5 – TLS
+
+**Descriptive statistics (with Outlier count):**
+| KEM            |   Mean |   DesvStd |   Median |   Min |     Max |   Outliers |
+|:---------------|-------:|----------:|---------:|------:|--------:|-----------:|
+| P-521          | 319.50 |    615.86 |    19.03 | 17.71 | 5629.51 |        106 |
+| mlkem1024      | 262.55 |    668.43 |     9.23 |  8.35 | 7017.52 |        111 |
+| p521_mlkem1024 | 333.62 |    708.25 |    28.34 | 26.17 | 7085.14 |        111 |
+
+**Shapiro–Wilk (p-valores):**
+| KEM            |   Shapiro_p |
+|:---------------|------------:|
+| P-521          |    1.48e-34 |
+| mlkem1024      |    3.61e-37 |
+| p521_mlkem1024 |    6.08e-36 |
+
+**Levene's test p-value:** 3.85e-01
+
+**Kruskal–Wallis p = 5.90e-99
+
+**Pairwise Mann–Whitney (p-values):**
+| KEM1      | KEM2           |   p-value |
+|:----------|:---------------|----------:|
+| P-521     | mlkem1024      |         0 |
+| P-521     | p521_mlkem1024 |         0 |
+| mlkem1024 | p521_mlkem1024 |         0 |
+
+**Pairwise t-tests (p-values):**
+| KEM1      | KEM2           |   p-value |
+|:----------|:---------------|----------:|
+| P-521     | mlkem1024      |     0.162 |
+| P-521     | p521_mlkem1024 |     0.737 |
+| mlkem1024 | p521_mlkem1024 |     0.103 |
+
+=== Cross-Level ANOVA (Loss=20%) ===
+
+=== TLS vs QUIC Comparisons (Loss=20%) ===
+Level 1 – P-256: TLS vs QUIC p=nan
+Level 1 – mlkem512: TLS vs QUIC p=nan
+Level 1 – p256_mlkem512: TLS vs QUIC p=0.000
+Level 1 – x25519: TLS vs QUIC p=nan
+Level 1 – x25519_mlkem512: TLS vs QUIC p=nan
+Level 3 – P-384: TLS vs QUIC p=nan
+Level 3 – mlkem768: TLS vs QUIC p=nan
+Level 3 – p384_mlkem768: TLS vs QUIC p=nan
+Level 3 – x448: TLS vs QUIC p=nan
+Level 3 – x448_mlkem768: TLS vs QUIC p=0.028
+Level 5 – P-521: TLS vs QUIC p=nan
+Level 5 – mlkem1024: TLS vs QUIC p=nan
+Level 5 – p521_mlkem1024: TLS vs QUIC p=0.045
+
+## Level 1
+
+| Protocol | KEM | Mean_0 | Mean_5 | Mean_10 | Mean_20 | CV_0 | CV_5 | CV_10 | CV_20 | O_0% | O_5% | O_10% | O_20% | Size_0 | Size_5 | Size_10 | Size_20 | Slope_ms_per_%loss |
+|------|------|------|------|------|------|------|------|------|------|------|------|------|------|------|------|------|------|------|
+| TLS | `P-256` | 2.49 | 67.44 | 123.24 | 266.18 | 0.15 | 4.45 | 3.18 | 2.22 | 0.4\% | 11.2\% | 16.6\% | 18.0\% | 1888 | 1896 | 1903 | 1923 | 13.40 |
+| TLS | `x25519` | 2.20 | 1.88 | 97.93 | 272.50 | 0.16 | 0.12 | 3.44 | 2.20 | 0.6\% | 5.8\% | 16.6\% | 18.8\% | 1822 | 1823 | 1837 | 1863 | 17.96 |
+| TLS | `p256_mlkem512` | 9.36 | 63.74 | 136.67 | 341.97 | 0.15 | 4.60 | 3.27 | 1.99 | 1.0\% | 15.0\% | 12.4\% | 2.4\% | 3448 | 3471 | 3486 | 3536 | 18.83 |
+| TLS | `x25519_mlkem512` | 2.50 | 65.11 | 128.21 | 289.17 | 0.17 | 4.62 | 2.73 | 2.05 | 9.4\% | 9.4\% | 18.4\% | 20.0\% | 3382 | 3394 | 3411 | 3441 | 15.10 |
+| TLS | `mlkem512` | 2.49 | 87.40 | 112.59 | 289.96 | 0.14 | 3.81 | 2.58 | 1.99 | 1.8\% | 14.8\% | 19.0\% | 20.0\% | 3318 | 3331 | 3343 | 3365 | 14.11 |
+| QUIC | `P-256` | 2.79 | 52.60 | 115.71 | 293.76 | 0.13 | 4.15 | 3.53 | 2.49 | 1.4\% | 10.2\% | 9.8\% | 19.5\% | 3963 | 4136 | 4392 | 5028 | 16.32 |
+| QUIC | `x25519` | 2.36 | 42.52 | 118.54 | 275.88 | 0.12 | 5.31 | 3.48 | 2.74 | 3.8\% | 4.4\% | 10.4\% | 18.5\% | 3963 | 4150 | 4419 | 5049 | 15.58 |
+| QUIC | `p256_mlkem512` | 11.91 | 54.57 | 101.59 | 210.48 | 0.17 | 3.70 | 2.83 | 2.09 | 17.8\% | 4.4\% | 9.3\% | 18.5\% | 5548 | 6186 | 6822 | 8886 | 10.46 |
+| QUIC | `x25519_mlkem512` | 4.64 | 38.25 | 99.58 | 248.15 | 0.13 | 4.71 | 2.96 | 2.25 | 9.6\% | 3.3\% | 9.8\% | 18.8\% | 5515 | 5864 | 6577 | 8240 | 14.12 |
+| QUIC | `mlkem512` | 2.65 | 59.03 | 140.78 | 281.66 | 0.13 | 4.34 | 2.95 | 2.12 | 6.8\% | 5.2\% | 11.9\% | 22.1\% | 5483 | 5926 | 6567 | 8000 | 14.73 |
+
+## Level 3
+
+| Protocol | KEM | Mean_0 | Mean_5 | Mean_10 | Mean_20 | CV_0 | CV_5 | CV_10 | CV_20 | O_0% | O_5% | O_10% | O_20% | Size_0 | Size_5 | Size_10 | Size_20 | Slope_ms_per_%loss |
+|------|------|------|------|------|------|------|------|------|------|------|------|------|------|------|------|------|------|------|
+| TLS | `P-384` | 11.12 | 83.79 | 139.42 | 291.31 | 0.18 | 3.70 | 2.89 | 1.97 | 0.4\% | 16.4\% | 17.8\% | 19.8\% | 2115 | 2128 | 2138 | 2162 | 14.03 |
+| TLS | `x448` | 7.09 | 65.51 | 145.41 | 311.85 | 0.16 | 4.02 | 2.93 | 1.94 | 0.2\% | 15.6\% | 18.2\% | 21.4\% | 2032 | 2045 | 2056 | 2078 | 16.45 |
+| TLS | `p384_mlkem768` | 27.31 | 87.69 | 138.45 | 359.24 | 5.87 | 3.94 | 3.06 | 1.91 | 0.2\% | 12.4\% | 12.8\% | 2.0\% | 4380 | 4425 | 4447 | 4523 | 18.67 |
+| TLS | `x448_mlkem768` | 8.18 | 46.45 | 120.65 | 280.13 | 0.18 | 4.20 | 3.46 | 2.22 | 1.2\% | 16.2\% | 11.6\% | 20.4\% | 4297 | 4314 | 4354 | 4382 | 15.63 |
+| TLS | `mlkem768` | 5.71 | 61.03 | 113.88 | 277.06 | 0.16 | 4.86 | 3.62 | 2.40 | 6.4\% | 14.4\% | 15.8\% | 24.4\% | 4184 | 4211 | 4229 | 4254 | 14.68 |
+| QUIC | `P-384` | 6.93 | 70.08 | 118.73 | 370.46 | 0.16 | 4.15 | 3.56 | 2.93 | 0.6\% | 12.1\% | 9.6\% | 18.3\% | 3963 | 4194 | 4362 | 4921 | 20.76 |
+| QUIC | `x448` | 5.09 | 59.42 | 113.06 | 237.79 | 0.14 | 4.26 | 3.27 | 2.87 | 8.2\% | 6.7\% | 9.4\% | 16.1\% | 3963 | 4153 | 4438 | 4991 | 11.97 |
+| QUIC | `p384_mlkem768` | 14.73 | 61.01 | 104.26 | 236.99 | 0.08 | 3.39 | 2.95 | 2.06 | 13.4\% | 5.4\% | 9.2\% | 18.1\% | 6403 | 7227 | 8351 | 11497 | 11.95 |
+| QUIC | `x448_mlkem768` | 7.29 | 65.66 | 107.61 | 202.71 | 0.09 | 3.57 | 3.18 | 2.16 | 13.4\% | 11.3\% | 9.0\% | 18.3\% | 6403 | 7402 | 7880 | 10093 | 9.19 |
+| QUIC | `mlkem768` | 3.96 | 51.30 | 97.99 | 186.06 | 0.11 | 4.12 | 3.41 | 2.18 | 10.2\% | 8.4\% | 8.7\% | 18.3\% | 5949 | 6439 | 7035 | 7925 | 8.96 |
+
+## Level 5
+
+| Protocol | KEM | Mean_0 | Mean_5 | Mean_10 | Mean_20 | CV_0 | CV_5 | CV_10 | CV_20 | O_0% | O_5% | O_10% | O_20% | Size_0 | Size_5 | Size_10 | Size_20 | Slope_ms_per_%loss |
+|------|------|------|------|------|------|------|------|------|------|------|------|------|------|------|------|------|------|------|
+| TLS | `P-521` | 22.16 | 102.39 | 155.78 | 319.50 | 0.16 | 3.31 | 2.94 | 1.93 | 1.2\% | 15.4\% | 17.2\% | 21.2\% | 2298 | 2315 | 2314 | 2340 | 14.75 |
+| TLS | `p521_mlkem1024` | 32.96 | 79.13 | 157.03 | 333.62 | 0.14 | 3.65 | 2.85 | 2.12 | 0.6\% | 9.6\% | 13.0\% | 22.2\% | 5426 | 5482 | 5544 | 5618 | 17.07 |
+| TLS | `mlkem1024` | 11.09 | 70.21 | 142.13 | 262.55 | 0.19 | 4.31 | 2.89 | 2.55 | 0.4\% | 13.0\% | 14.2\% | 22.2\% | 5160 | 5186 | 5213 | 5266 | 12.71 |
+| QUIC | `P-521` | 6.33 | 70.18 | 147.45 | 360.76 | 0.13 | 4.15 | 4.44 | 2.54 | 13.0\% | 5.8\% | 9.2\% | 20.6\% | 3963 | 4180 | 4423 | 5042 | 19.65 |
+| QUIC | `p521_mlkem1024` | 14.99 | 78.06 | 130.57 | 253.16 | 0.12 | 3.39 | 2.46 | 1.97 | 11.8\% | 5.6\% | 11.4\% | 21.4\% | 6731 | 7597 | 8751 | 11666 | 11.76 |
+| QUIC | `mlkem1024` | 4.67 | 36.06 | 97.72 | 186.92 | 0.15 | 4.87 | 2.99 | 2.29 | 11.4\% | 8.3\% | 11.4\% | 16.3\% | 6598 | 7082 | 7911 | 10272 | 9.89 |

@@ -1,0 +1,433 @@
+#python3 analysis_tls_quic_ge.py --ideal-dir ./ideal --ge-dirs estable inestable > report_model.log
+
+=== Per-Level KEM Comparisons (Scenario=Ideal) ===
+
+Level 1 – QUIC
+| KEM             |   mean |   std |   median |   min |   max |
+|:----------------|-------:|------:|---------:|------:|------:|
+| P-256           |   2.79 |  0.37 |     2.67 |  2.23 |  4.43 |
+| mlkem512        |   2.65 |  0.33 |     2.56 |  2.05 |  4.91 |
+| p256_mlkem512   |  11.91 |  2.02 |    10.86 | 10.10 | 18.14 |
+| x25519          |   2.36 |  0.29 |     2.27 |  1.95 |  3.48 |
+| x25519_mlkem512 |   4.64 |  0.59 |     4.38 |  3.98 |  7.43 |
+Shapiro‐Wilk p-values: P-256=0.000, mlkem512=0.000, p256_mlkem512=0.000, x25519=0.000, x25519_mlkem512=0.000
+Levene’s test p-value: 0.000
+t-test P-256 vs mlkem512: p=0.000
+t-test P-256 vs p256_mlkem512: p=0.000
+t-test P-256 vs x25519: p=0.000
+t-test P-256 vs x25519_mlkem512: p=0.000
+t-test mlkem512 vs p256_mlkem512: p=0.000
+t-test mlkem512 vs x25519: p=0.000
+t-test mlkem512 vs x25519_mlkem512: p=0.000
+t-test p256_mlkem512 vs x25519: p=0.000
+t-test p256_mlkem512 vs x25519_mlkem512: p=0.000
+t-test x25519 vs x25519_mlkem512: p=0.000
+
+Level 1 – TLS
+| KEM             |   mean |   std |   median |   min |   max |
+|:----------------|-------:|------:|---------:|------:|------:|
+| P-256           |   2.49 |  0.38 |     2.41 |  1.74 |  5.32 |
+| mlkem512        |   2.49 |  0.36 |     2.40 |  1.78 |  3.72 |
+| p256_mlkem512   |   9.36 |  1.37 |     8.93 |  7.16 | 14.16 |
+| x25519          |   2.20 |  0.36 |     2.13 |  1.54 |  4.34 |
+| x25519_mlkem512 |   2.50 |  0.43 |     2.37 |  2.01 |  4.60 |
+Shapiro‐Wilk p-values: P-256=0.000, mlkem512=0.000, p256_mlkem512=0.000, x25519=0.000, x25519_mlkem512=0.000
+Levene’s test p-value: 0.000
+t-test P-256 vs mlkem512: p=0.981
+t-test P-256 vs p256_mlkem512: p=0.000
+t-test P-256 vs x25519: p=0.000
+t-test P-256 vs x25519_mlkem512: p=0.604
+t-test mlkem512 vs p256_mlkem512: p=0.000
+t-test mlkem512 vs x25519: p=0.000
+t-test mlkem512 vs x25519_mlkem512: p=0.608
+t-test p256_mlkem512 vs x25519: p=0.000
+t-test p256_mlkem512 vs x25519_mlkem512: p=0.000
+t-test x25519 vs x25519_mlkem512: p=0.000
+
+Level 3 – QUIC
+| KEM           |   mean |   std |   median |   min |   max |
+|:--------------|-------:|------:|---------:|------:|------:|
+| P-384         |   6.93 |  1.09 |     6.30 |  5.99 | 11.06 |
+| mlkem768      |   3.96 |  0.43 |     3.85 |  3.49 |  6.46 |
+| p384_mlkem768 |  14.73 |  1.18 |    14.34 | 13.87 | 22.95 |
+| x448          |   5.09 |  0.71 |     4.77 |  4.42 |  8.27 |
+| x448_mlkem768 |   7.29 |  0.67 |     7.07 |  6.72 | 10.91 |
+Shapiro‐Wilk p-values: P-384=0.000, mlkem768=0.000, p384_mlkem768=0.000, x448=0.000, x448_mlkem768=0.000
+Levene’s test p-value: 0.000
+t-test P-384 vs mlkem768: p=0.000
+t-test P-384 vs p384_mlkem768: p=0.000
+t-test P-384 vs x448: p=0.000
+t-test P-384 vs x448_mlkem768: p=0.000
+t-test mlkem768 vs p384_mlkem768: p=0.000
+t-test mlkem768 vs x448: p=0.000
+t-test mlkem768 vs x448_mlkem768: p=0.000
+t-test p384_mlkem768 vs x448: p=0.000
+t-test p384_mlkem768 vs x448_mlkem768: p=0.000
+t-test x448 vs x448_mlkem768: p=0.000
+
+Level 3 – TLS
+| KEM           |   mean |    std |   median |   min |     max |
+|:--------------|-------:|-------:|---------:|------:|--------:|
+| P-384         |  11.12 |   1.96 |    10.48 |  8.38 |   17.59 |
+| mlkem768      |   5.71 |   0.93 |     5.35 |  4.60 |    9.57 |
+| p384_mlkem768 |  27.31 | 160.25 |    19.66 | 15.42 | 3602.88 |
+| x448          |   7.09 |   1.16 |     7.02 |  5.15 |   10.86 |
+| x448_mlkem768 |   8.18 |   1.45 |     7.54 |  6.28 |   13.39 |
+Shapiro‐Wilk p-values: P-384=0.000, mlkem768=0.000, p384_mlkem768=0.000, x448=0.000, x448_mlkem768=0.000
+Levene’s test p-value: 0.212
+t-test P-384 vs mlkem768: p=0.000
+t-test P-384 vs p384_mlkem768: p=0.024
+t-test P-384 vs x448: p=0.000
+t-test P-384 vs x448_mlkem768: p=0.000
+t-test mlkem768 vs p384_mlkem768: p=0.003
+t-test mlkem768 vs x448: p=0.000
+t-test mlkem768 vs x448_mlkem768: p=0.000
+t-test p384_mlkem768 vs x448: p=0.005
+t-test p384_mlkem768 vs x448_mlkem768: p=0.008
+t-test x448 vs x448_mlkem768: p=0.000
+
+Level 5 – QUIC
+| KEM            |   mean |   std |   median |   min |   max |
+|:---------------|-------:|------:|---------:|------:|------:|
+| P-521          |   6.33 |  0.81 |     6.05 |  5.60 | 10.25 |
+| mlkem1024      |   4.67 |  0.68 |     4.34 |  3.84 |  6.80 |
+| p521_mlkem1024 |  14.99 |  1.78 |    14.46 | 13.57 | 22.86 |
+Shapiro‐Wilk p-values: P-521=0.000, mlkem1024=0.000, p521_mlkem1024=0.000
+Levene’s test p-value: 0.000
+t-test P-521 vs mlkem1024: p=0.000
+t-test P-521 vs p521_mlkem1024: p=0.000
+t-test mlkem1024 vs p521_mlkem1024: p=0.000
+
+Level 5 – TLS
+| KEM            |   mean |   std |   median |   min |   max |
+|:---------------|-------:|------:|---------:|------:|------:|
+| P-521          |  22.16 |  3.50 |    20.56 | 18.09 | 33.94 |
+| mlkem1024      |  11.09 |  2.06 |    10.18 |  8.68 | 19.63 |
+| p521_mlkem1024 |  32.96 |  4.66 |    32.01 | 26.56 | 50.00 |
+Shapiro‐Wilk p-values: P-521=0.000, mlkem1024=0.000, p521_mlkem1024=0.000
+Levene’s test p-value: 0.000
+t-test P-521 vs mlkem1024: p=0.000
+t-test P-521 vs p521_mlkem1024: p=0.000
+t-test mlkem1024 vs p521_mlkem1024: p=0.000
+
+=== Cross-Level ANOVA (Scenario=Ideal) ===
+
+=== TLS vs QUIC Comparisons (Scenario=Ideal) ===
+Level 1 – P-256: TLS vs QUIC p=0.000
+Level 1 – mlkem512: TLS vs QUIC p=0.000
+Level 1 – p256_mlkem512: TLS vs QUIC p=0.000
+Level 1 – x25519: TLS vs QUIC p=0.000
+Level 1 – x25519_mlkem512: TLS vs QUIC p=0.000
+Level 3 – P-384: TLS vs QUIC p=0.000
+Level 3 – mlkem768: TLS vs QUIC p=0.000
+Level 3 – p384_mlkem768: TLS vs QUIC p=0.080
+Level 3 – x448: TLS vs QUIC p=0.000
+Level 3 – x448_mlkem768: TLS vs QUIC p=0.000
+Level 5 – P-521: TLS vs QUIC p=0.000
+Level 5 – mlkem1024: TLS vs QUIC p=0.000
+Level 5 – p521_mlkem1024: TLS vs QUIC p=0.000
+
+=== Per-Level KEM Comparisons (Scenario=Stable) ===
+
+Level 1 – QUIC
+| KEM             |   mean |    std |   median |   min |      max |
+|:----------------|-------:|-------:|---------:|------:|---------:|
+| P-256           | 299.78 | 968.42 |     2.81 |  2.22 |  6999.95 |
+| mlkem512        | 168.38 | 463.84 |     2.68 |  2.13 |  3001.64 |
+| p256_mlkem512   | 251.93 | 580.33 |    10.89 |  9.58 |  3012.65 |
+| x25519          | 340.69 | 934.85 |     2.23 |  1.88 |  6997.69 |
+| x25519_mlkem512 | 264.53 | 843.23 |     4.57 |  3.64 | 13264.23 |
+Shapiro‐Wilk p-values: P-256=0.000, mlkem512=0.000, p256_mlkem512=0.000, x25519=0.000, x25519_mlkem512=0.000
+Levene’s test p-value: 0.026
+t-test P-256 vs mlkem512: p=0.013
+t-test P-256 vs p256_mlkem512: p=0.385
+t-test P-256 vs x25519: p=0.536
+t-test P-256 vs x25519_mlkem512: p=0.576
+t-test mlkem512 vs p256_mlkem512: p=0.022
+t-test mlkem512 vs x25519: p=0.001
+t-test mlkem512 vs x25519_mlkem512: p=0.044
+t-test p256_mlkem512 vs x25519: p=0.102
+t-test p256_mlkem512 vs x25519_mlkem512: p=0.802
+t-test x25519 vs x25519_mlkem512: p=0.222
+
+Level 1 – TLS
+| KEM             |   mean |    std |   median |   min |     max |
+|:----------------|-------:|-------:|---------:|------:|--------:|
+| P-256           | 274.53 | 753.78 |     2.10 |  1.66 | 8900.19 |
+| mlkem512        | 321.53 | 774.28 |     2.33 |  1.76 | 7706.44 |
+| p256_mlkem512   | 351.16 | 816.74 |     8.52 |  7.49 | 7681.30 |
+| x25519          | 311.01 | 626.56 |     2.02 |  1.57 | 4645.78 |
+| x25519_mlkem512 | 303.25 | 703.87 |     2.60 |  1.97 | 7710.06 |
+Shapiro‐Wilk p-values: P-256=0.000, mlkem512=0.000, p256_mlkem512=0.000, x25519=0.000, x25519_mlkem512=0.000
+Levene’s test p-value: 0.654
+t-test P-256 vs mlkem512: p=0.331
+t-test P-256 vs p256_mlkem512: p=0.123
+t-test P-256 vs x25519: p=0.405
+t-test P-256 vs x25519_mlkem512: p=0.534
+t-test mlkem512 vs p256_mlkem512: p=0.556
+t-test mlkem512 vs x25519: p=0.813
+t-test mlkem512 vs x25519_mlkem512: p=0.696
+t-test p256_mlkem512 vs x25519: p=0.383
+t-test p256_mlkem512 vs x25519_mlkem512: p=0.321
+t-test x25519 vs x25519_mlkem512: p=0.854
+
+Level 3 – QUIC
+| KEM           |   mean |     std |   median |   min |     max |
+|:--------------|-------:|--------:|---------:|------:|--------:|
+| P-384         | 301.15 |  806.42 |     6.51 |  5.82 | 7000.88 |
+| mlkem768      | 262.63 |  721.19 |     4.33 |  3.57 | 6999.99 |
+| p384_mlkem768 | 293.00 |  639.70 |    14.61 | 13.53 | 3053.01 |
+| x448          | 434.70 | 1151.85 |     4.81 |  4.24 | 7000.73 |
+| x448_mlkem768 | 219.87 |  548.18 |     7.51 |  6.66 | 3079.93 |
+Shapiro‐Wilk p-values: P-384=0.000, mlkem768=0.000, p384_mlkem768=0.000, x448=0.000, x448_mlkem768=0.000
+Levene’s test p-value: 0.002
+t-test P-384 vs mlkem768: p=0.470
+t-test P-384 vs p384_mlkem768: p=0.871
+t-test P-384 vs x448: p=0.056
+t-test P-384 vs x448_mlkem768: p=0.088
+t-test mlkem768 vs p384_mlkem768: p=0.524
+t-test mlkem768 vs x448: p=0.011
+t-test mlkem768 vs x448_mlkem768: p=0.340
+t-test p384_mlkem768 vs x448: p=0.031
+t-test p384_mlkem768 vs x448_mlkem768: p=0.075
+t-test x448 vs x448_mlkem768: p=0.001
+
+Level 3 – TLS
+| KEM           |   mean |    std |   median |   min |      max |
+|:--------------|-------:|-------:|---------:|------:|---------:|
+| P-384         | 304.63 | 725.19 |     9.44 |  8.48 |  8695.80 |
+| mlkem768      | 327.04 | 807.33 |     5.17 |  4.52 |  6388.26 |
+| p384_mlkem768 | 322.70 | 792.46 |    17.16 | 15.33 |  9974.44 |
+| x448          | 400.02 | 933.87 |     6.22 |  5.08 | 13156.35 |
+| x448_mlkem768 | 356.22 | 808.99 |     7.11 |  6.14 |  6404.80 |
+Shapiro‐Wilk p-values: P-384=0.000, mlkem768=0.000, p384_mlkem768=0.000, x448=0.000, x448_mlkem768=0.000
+Levene’s test p-value: 0.320
+t-test P-384 vs mlkem768: p=0.644
+t-test P-384 vs p384_mlkem768: p=0.707
+t-test P-384 vs x448: p=0.072
+t-test P-384 vs x448_mlkem768: p=0.289
+t-test mlkem768 vs p384_mlkem768: p=0.932
+t-test mlkem768 vs x448: p=0.186
+t-test mlkem768 vs x448_mlkem768: p=0.568
+t-test p384_mlkem768 vs x448: p=0.158
+t-test p384_mlkem768 vs x448_mlkem768: p=0.508
+t-test x448 vs x448_mlkem768: p=0.428
+
+Level 5 – QUIC
+| KEM            |   mean |    std |   median |   min |     max |
+|:---------------|-------:|-------:|---------:|------:|--------:|
+| P-521          | 244.19 | 622.61 |     6.37 |  5.68 | 3004.93 |
+| mlkem1024      | 220.27 | 626.57 |     4.64 |  3.78 | 7000.18 |
+| p521_mlkem1024 | 247.45 | 609.03 |    15.25 | 13.63 | 7021.58 |
+Shapiro‐Wilk p-values: P-521=0.000, mlkem1024=0.000, p521_mlkem1024=0.000
+Levene’s test p-value: 0.863
+t-test P-521 vs mlkem1024: p=0.581
+t-test P-521 vs p521_mlkem1024: p=0.939
+t-test mlkem1024 vs p521_mlkem1024: p=0.523
+
+Level 5 – TLS
+| KEM            |   mean |    std |   median |   min |      max |
+|:---------------|-------:|-------:|---------:|------:|---------:|
+| P-521          | 347.96 | 992.51 |    19.26 | 17.76 | 17064.65 |
+| mlkem1024      | 320.07 | 794.55 |     9.52 |  8.52 |  7056.60 |
+| p521_mlkem1024 | 301.35 | 722.25 |    28.56 | 26.30 |  8602.91 |
+Shapiro‐Wilk p-values: P-521=0.000, mlkem1024=0.000, p521_mlkem1024=0.000
+Levene’s test p-value: 0.569
+t-test P-521 vs mlkem1024: p=0.624
+t-test P-521 vs p521_mlkem1024: p=0.396
+t-test mlkem1024 vs p521_mlkem1024: p=0.697
+
+=== Cross-Level ANOVA (Scenario=Stable) ===
+
+=== TLS vs QUIC Comparisons (Scenario=Stable) ===
+Level 1 – P-256: TLS vs QUIC p=0.663
+Level 1 – mlkem512: TLS vs QUIC p=0.000
+Level 1 – p256_mlkem512: TLS vs QUIC p=0.032
+Level 1 – x25519: TLS vs QUIC p=0.584
+Level 1 – x25519_mlkem512: TLS vs QUIC p=0.458
+Level 3 – P-384: TLS vs QUIC p=0.946
+Level 3 – mlkem768: TLS vs QUIC p=0.206
+Level 3 – p384_mlkem768: TLS vs QUIC p=0.529
+Level 3 – x448: TLS vs QUIC p=0.626
+Level 3 – x448_mlkem768: TLS vs QUIC p=0.003
+Level 5 – P-521: TLS vs QUIC p=0.055
+Level 5 – mlkem1024: TLS vs QUIC p=0.033
+Level 5 – p521_mlkem1024: TLS vs QUIC p=0.220
+
+=== Per-Level KEM Comparisons (Scenario=Unstable) ===
+
+Level 1 – QUIC
+| KEM             |   mean |     std |   median |   min |      max |
+|:----------------|-------:|--------:|---------:|------:|---------:|
+| P-256           | 948.57 | 1882.29 |     3.23 |  2.36 |  9995.92 |
+| mlkem512        | 672.97 | 1301.89 |     3.45 |  2.38 |  9372.65 |
+| p256_mlkem512   | 763.62 | 1291.37 |    13.47 | 10.20 |  7008.20 |
+| x25519          | 799.58 | 1637.02 |     2.94 |  2.14 |  9996.10 |
+| x25519_mlkem512 | 757.15 | 1500.99 |     5.88 |  4.11 | 10890.94 |
+Shapiro‐Wilk p-values: P-256=0.000, mlkem512=0.000, p256_mlkem512=0.000, x25519=0.000, x25519_mlkem512=0.000
+Levene’s test p-value: 0.245
+t-test P-256 vs mlkem512: p=0.034
+t-test P-256 vs p256_mlkem512: p=0.153
+t-test P-256 vs x25519: p=0.296
+t-test P-256 vs x25519_mlkem512: p=0.152
+t-test mlkem512 vs p256_mlkem512: p=0.384
+t-test mlkem512 vs x25519: p=0.290
+t-test mlkem512 vs x25519_mlkem512: p=0.449
+t-test p256_mlkem512 vs x25519: p=0.762
+t-test p256_mlkem512 vs x25519_mlkem512: p=0.953
+t-test x25519 vs x25519_mlkem512: p=0.733
+
+Level 1 – TLS
+| KEM             |    mean |      std |   median |   min |       max |
+|:----------------|--------:|---------:|---------:|------:|----------:|
+| P-256           | 1304.59 |  4687.63 |   206.12 |  1.74 |  59742.00 |
+| mlkem512        | 1884.03 |  9750.83 |   206.25 |  1.83 | 119941.77 |
+| p256_mlkem512   | 1972.01 | 12496.50 |     8.71 |  7.38 | 237576.43 |
+| x25519          | 1523.57 |  8101.25 |   205.06 |  1.62 | 116782.35 |
+| x25519_mlkem512 | 1349.58 |  4564.29 |   207.12 |  2.11 |  61757.02 |
+Shapiro‐Wilk p-values: P-256=0.000, mlkem512=0.000, p256_mlkem512=0.000, x25519=0.000, x25519_mlkem512=0.000
+Levene’s test p-value: 0.604
+t-test P-256 vs mlkem512: p=0.231
+t-test P-256 vs p256_mlkem512: p=0.264
+t-test P-256 vs x25519: p=0.601
+t-test P-256 vs x25519_mlkem512: p=0.878
+t-test mlkem512 vs p256_mlkem512: p=0.901
+t-test mlkem512 vs x25519: p=0.525
+t-test mlkem512 vs x25519_mlkem512: p=0.267
+t-test p256_mlkem512 vs x25519: p=0.501
+t-test p256_mlkem512 vs x25519_mlkem512: p=0.296
+t-test x25519 vs x25519_mlkem512: p=0.676
+
+Level 3 – QUIC
+| KEM           |   mean |     std |   median |   min |      max |
+|:--------------|-------:|--------:|---------:|------:|---------:|
+| P-384         | 961.00 | 1830.59 |     8.73 |  6.14 |  7005.46 |
+| mlkem768      | 597.63 | 1097.05 |     4.68 |  3.76 |  9000.47 |
+| p384_mlkem768 | 861.50 | 1610.05 |    21.19 | 14.24 | 14623.24 |
+| x448          | 947.48 | 1752.96 |     6.31 |  4.50 |  7002.66 |
+| x448_mlkem768 | 774.34 | 1348.13 |     9.77 |  7.08 |  9028.64 |
+Shapiro‐Wilk p-values: P-384=0.000, mlkem768=0.000, p384_mlkem768=0.000, x448=0.000, x448_mlkem768=0.000
+Levene’s test p-value: 0.017
+t-test P-384 vs mlkem768: p=0.003
+t-test P-384 vs p384_mlkem768: p=0.471
+t-test P-384 vs x448: p=0.925
+t-test P-384 vs x448_mlkem768: p=0.148
+t-test mlkem768 vs p384_mlkem768: p=0.014
+t-test mlkem768 vs x448: p=0.002
+t-test mlkem768 vs x448_mlkem768: p=0.063
+t-test p384_mlkem768 vs x448: p=0.512
+t-test p384_mlkem768 vs x448_mlkem768: p=0.449
+t-test x448 vs x448_mlkem768: p=0.155
+
+Level 3 – TLS
+| KEM           |    mean |      std |   median |   min |       max |
+|:--------------|--------:|---------:|---------:|------:|----------:|
+| P-384         | 1206.82 |  3382.26 |   217.12 |  8.62 |  40053.69 |
+| mlkem768      | 3065.91 | 14703.41 |   211.49 |  4.57 | 239145.67 |
+| p384_mlkem768 | 3503.84 | 17513.43 |   225.47 | 15.66 | 240427.95 |
+| x448          | 1290.59 |  3160.89 |   213.83 |  5.17 |  39602.55 |
+| x448_mlkem768 | 2223.70 |  9673.93 |    10.91 |  6.24 | 176715.24 |
+Shapiro‐Wilk p-values: P-384=0.000, mlkem768=0.000, p384_mlkem768=0.000, x448=0.000, x448_mlkem768=0.000
+Levene’s test p-value: 0.002
+t-test P-384 vs mlkem768: p=0.006
+t-test P-384 vs p384_mlkem768: p=0.004
+t-test P-384 vs x448: p=0.686
+t-test P-384 vs x448_mlkem768: p=0.027
+t-test mlkem768 vs p384_mlkem768: p=0.669
+t-test mlkem768 vs x448: p=0.009
+t-test mlkem768 vs x448_mlkem768: p=0.285
+t-test p384_mlkem768 vs x448: p=0.006
+t-test p384_mlkem768 vs x448_mlkem768: p=0.153
+t-test x448 vs x448_mlkem768: p=0.041
+
+Level 5 – QUIC
+| KEM            |   mean |     std |   median |   min |     max |
+|:---------------|-------:|--------:|---------:|------:|--------:|
+| P-521          | 929.50 | 1835.50 |     8.18 |  5.98 | 7006.08 |
+| mlkem1024      | 701.65 | 1317.99 |     5.68 |  4.01 | 8026.48 |
+| p521_mlkem1024 | 854.41 | 1572.38 |    20.57 | 14.19 | 7152.41 |
+Shapiro‐Wilk p-values: P-521=0.000, mlkem1024=0.000, p521_mlkem1024=0.000
+Levene’s test p-value: 0.189
+t-test P-521 vs mlkem1024: p=0.071
+t-test P-521 vs p521_mlkem1024: p=0.574
+t-test mlkem1024 vs p521_mlkem1024: p=0.174
+
+Level 5 – TLS
+| KEM            |    mean |      std |   median |   min |       max |
+|:---------------|--------:|---------:|---------:|------:|----------:|
+| P-521          | 1596.17 | 10795.74 |   224.32 | 18.09 | 235353.72 |
+| mlkem1024      | 1910.96 |  9144.33 |    14.93 |  8.51 | 121041.42 |
+| p521_mlkem1024 | 1488.85 |  4214.64 |   233.33 | 26.23 |  60042.29 |
+Shapiro‐Wilk p-values: P-521=0.000, mlkem1024=0.000, p521_mlkem1024=0.000
+Levene’s test p-value: 0.681
+t-test P-521 vs mlkem1024: p=0.619
+t-test P-521 vs p521_mlkem1024: p=0.836
+t-test mlkem1024 vs p521_mlkem1024: p=0.349
+
+=== Cross-Level ANOVA (Scenario=Unstable) ===
+
+=== TLS vs QUIC Comparisons (Scenario=Unstable) ===
+Level 1 – P-256: TLS vs QUIC p=0.130
+Level 1 – mlkem512: TLS vs QUIC p=0.006
+Level 1 – p256_mlkem512: TLS vs QUIC p=0.033
+Level 1 – x25519: TLS vs QUIC p=0.054
+Level 1 – x25519_mlkem512: TLS vs QUIC p=0.007
+Level 3 – P-384: TLS vs QUIC p=0.183
+Level 3 – mlkem768: TLS vs QUIC p=0.000
+Level 3 – p384_mlkem768: TLS vs QUIC p=0.001
+Level 3 – x448: TLS vs QUIC p=0.046
+Level 3 – x448_mlkem768: TLS vs QUIC p=0.001
+Level 5 – P-521: TLS vs QUIC p=0.178
+Level 5 – mlkem1024: TLS vs QUIC p=0.004
+Level 5 – p521_mlkem1024: TLS vs QUIC p=0.002
+
+=== Relative Increases vs Ideal ===
+
+Average latency increase in Stable:
+  QUIC: 5598.8%
+  TLS: 5976.3%
+
+Average latency increase in Unstable:
+  QUIC: 16471.8%
+  TLS: 32528.0%
+
+## Level 1
+
+| Protocol | KEM | Mean_Ideal | Mean_Stable | Mean_Unstable | CV_Ideal | CV_Stable | CV_Unstable | O_Ideal% | O_Stable% | O_Unstable% | Size_Ideal | Size_Stable | Size_Unstable | Slope_ms |
+|------|------|------|------|------|------|------|------|------|------|------|------|------|------|------|
+| TLS | `P-256` | 2.49 | 274.53 | 1304.59 | 0.15 | 2.75 | 3.59 | 0.4% | 16.6% | 9.8% | 1888 | 1936 | 2027 | 651.05 |
+| TLS | `mlkem512` | 2.49 | 321.53 | 1884.03 | 0.14 | 2.41 | 5.18 | 1.8% | 19.0% | 9.4% | 3318 | 3395 | 3572 | 940.77 |
+| TLS | `p256_mlkem512` | 9.36 | 351.16 | 1972.01 | 0.15 | 2.33 | 6.34 | 1.0% | 22.6% | 13.4% | 3448 | 3531 | 3635 | 981.33 |
+| TLS | `x25519` | 2.20 | 311.01 | 1523.57 | 0.16 | 2.01 | 5.32 | 0.6% | 20.2% | 10.6% | 1822 | 1891 | 1934 | 760.69 |
+| TLS | `x25519_mlkem512` | 2.50 | 303.25 | 1349.58 | 0.17 | 2.32 | 3.38 | 9.4% | 18.8% | 9.2% | 3382 | 3456 | 3656 | 673.54 |
+| QUIC | `P-256` | 2.79 | 299.78 | 948.57 | 0.13 | 3.23 | 1.98 | 1.4% | 15.2% | 17.3% | 3963 | 4835 | 7332 | 472.89 |
+| QUIC | `mlkem512` | 2.65 | 168.38 | 672.97 | 0.13 | 2.75 | 1.93 | 6.8% | 14.9% | 9.1% | 5483 | 7482 | 14342 | 335.16 |
+| QUIC | `p256_mlkem512` | 11.91 | 251.93 | 763.62 | 0.17 | 2.30 | 1.69 | 17.8% | 18.5% | 12.8% | 5548 | 8248 | 17195 | 375.86 |
+| QUIC | `x25519` | 2.36 | 340.69 | 799.58 | 0.12 | 2.74 | 2.05 | 3.8% | 18.6% | 14.5% | 3963 | 4991 | 7937 | 398.61 |
+| QUIC | `x25519_mlkem512` | 4.64 | 264.53 | 757.15 | 0.13 | 3.19 | 1.98 | 9.6% | 19.0% | 11.0% | 5515 | 8782 | 14242 | 376.25 |
+
+## Level 3
+
+| Protocol | KEM | Mean_Ideal | Mean_Stable | Mean_Unstable | CV_Ideal | CV_Stable | CV_Unstable | O_Ideal% | O_Stable% | O_Unstable% | Size_Ideal | Size_Stable | Size_Unstable | Slope_ms |
+|------|------|------|------|------|------|------|------|------|------|------|------|------|------|------|
+| TLS | `P-384` | 11.12 | 304.63 | 1206.82 | 0.18 | 2.38 | 2.80 | 0.4% | 18.6% | 10.8% | 2115 | 2186 | 2242 | 597.85 |
+| TLS | `mlkem768` | 5.71 | 327.04 | 3065.91 | 0.16 | 2.47 | 4.80 | 6.4% | 19.2% | 12.0% | 4184 | 4198 | 4394 | 1530.10 |
+| TLS | `p384_mlkem768` | 27.31 | 322.70 | 3503.84 | 5.87 | 2.46 | 5.00 | 0.2% | 24.8% | 11.0% | 4380 | 4438 | 4705 | 1738.27 |
+| TLS | `x448` | 7.09 | 400.02 | 1290.59 | 0.16 | 2.33 | 2.45 | 0.2% | 15.8% | 11.4% | 2032 | 2098 | 2160 | 641.75 |
+| TLS | `x448_mlkem768` | 8.18 | 356.22 | 2223.70 | 0.18 | 2.27 | 4.35 | 1.2% | 22.6% | 10.4% | 4297 | 4315 | 4490 | 1107.76 |
+| QUIC | `P-384` | 6.93 | 301.15 | 961.00 | 0.16 | 2.68 | 1.90 | 0.6% | 18.5% | 17.0% | 3963 | 4858 | 7203 | 477.03 |
+| QUIC | `mlkem768` | 3.96 | 262.63 | 597.63 | 0.11 | 2.75 | 1.84 | 10.2% | 18.9% | 8.7% | 5949 | 8187 | 12206 | 296.83 |
+| QUIC | `p384_mlkem768` | 14.73 | 293.00 | 861.50 | 0.08 | 2.18 | 1.87 | 13.4% | 20.5% | 12.1% | 6403 | 10132 | 17919 | 423.39 |
+| QUIC | `x448` | 5.09 | 434.70 | 947.48 | 0.14 | 2.65 | 1.85 | 8.2% | 21.0% | 18.3% | 3963 | 5143 | 6695 | 471.20 |
+| QUIC | `x448_mlkem768` | 7.29 | 219.87 | 774.34 | 0.09 | 2.49 | 1.74 | 13.4% | 17.1% | 12.2% | 6403 | 9479 | 16695 | 383.52 |
+
+## Level 5
+
+| Protocol | KEM | Mean_Ideal | Mean_Stable | Mean_Unstable | CV_Ideal | CV_Stable | CV_Unstable | O_Ideal% | O_Stable% | O_Unstable% | Size_Ideal | Size_Stable | Size_Unstable | Slope_ms |
+|------|------|------|------|------|------|------|------|------|------|------|------|------|------|------|
+| TLS | `P-521` | 22.16 | 347.96 | 1596.17 | 0.16 | 2.85 | 6.76 | 1.2% | 17.8% | 11.2% | 2298 | 2339 | 2454 | 787.00 |
+| TLS | `mlkem1024` | 11.09 | 320.07 | 1910.96 | 0.19 | 2.48 | 4.79 | 0.4% | 24.8% | 10.4% | 5160 | 4862 | 5390 | 949.93 |
+| TLS | `p521_mlkem1024` | 32.96 | 301.35 | 1488.85 | 0.14 | 2.40 | 2.83 | 0.6% | 22.8% | 11.6% | 5426 | 5134 | 5780 | 727.94 |
+| QUIC | `P-521` | 6.33 | 244.19 | 929.50 | 0.13 | 2.55 | 1.97 | 13.0% | 17.2% | 15.2% | 3963 | 4917 | 7088 | 461.58 |
+| QUIC | `mlkem1024` | 4.67 | 220.27 | 701.65 | 0.15 | 2.84 | 1.88 | 11.4% | 15.8% | 8.5% | 6598 | 9446 | 15554 | 348.49 |
+| QUIC | `p521_mlkem1024` | 14.99 | 247.45 | 854.41 | 0.12 | 2.46 | 1.84 | 11.8% | 18.5% | 11.7% | 6731 | 10759 | 17337 | 419.71 |
