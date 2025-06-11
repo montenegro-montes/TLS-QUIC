@@ -18,3 +18,10 @@ This project automates performance testing of TLS vs QUIC with various quantum-s
 - **Pumba** (optional) for network impairment: [github.com/alexei-led/pumba](https://github.com/alexei-led/pumba)  
 - **Wireshark** installed and accessible (`wireshark` on Linux or `/Applications/Wireshark.app` on macOS)  
 - `oqs` Docker image built with the test scripts (`doCert.sh`, `perftestServerTlsQuic.sh`, `perftestClientTlsQuic.sh`)  
+
+
+## Usage
+#Launching Benchmarks
+Make Launcherv3.sh executable and run:
+  ./Launcher.sh [tls|quic] [mutual|single] [capture|captureKey|nocapture] [none|simple|stable|unstable] [loss-percent] [delay-ms]
+
