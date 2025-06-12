@@ -20,14 +20,14 @@ This project automates performance testing of TLS vs QUIC with various quantum-s
 - `oqs` Docker image built with the test scripts (`doCert.sh`, `perftestServerTlsQuic.sh`, `perftestClientTlsQuic.sh`)  
 
 ## Contains
-.
-├── Launcher.sh # Main benchmarking script
-├── Docker # Dockerfiles 
-├── Ideal  # Ideal case
-├── Size # Size evaluation of Ideal case
-├── Delays # Delays evaluation
-├── Loss # Loss evalutation
-└── README.md # This file
+
+- **`Launcher.sh`** — Main benchmarking script  
+- **`Docker/`** — Dockerfiles  
+- **`Ideal/`** — Ideal case  
+- **`Size/`** — Size evaluation of the ideal case  
+- **`Delays/`** — Delays evaluation  
+- **`Loss/`** — Loss evaluation  
+- **`README.md`** — This file 
 
 
    
