@@ -74,16 +74,9 @@ This project automates performance testing of TLS vs QUIC with various quantum-s
 
 # 3) TLS, server-only auth, key capture, unstable model
 ./Launcher.sh tls single captureKey unstable 0 0
-## Installation
-1. Create docker container executing: docker build -t oqs .
-2. Launching Benchmarks:  
-  ./Launcher.sh [tls|quic] [mutual|single] [capture|captureKey|nocapture] [none|simple|stable|unstable] [loss-percent] [delay-ms]
-  - tls or quic
-  - authentication server o mutual
-  - capture packets with wireshark, capture and store key session, and nocapture
-  - none delays neither loss, simple use loss-percert and delays, stable run loss estable model, unstable run loss unestable model
-
+```
 ## Stadistical Evaluations
+
 Each folder contains an Analysis folder with detailed stadistical information.
 
 ## Contributing
