@@ -29,9 +29,51 @@ This project automates performance testing of TLS vs QUIC with various quantum-s
 - **`Loss/`** — Loss evaluation  
 - **`README.md`** — This file 
 
-
    
+## Installation
 
+1. **Build the Docker image**:
+   ```bash
+   docker build -t oqs .
+   ```
+2. **Make the launcher executable**:
+   ```bash
+   chmod +x Launcher.sh
+   ```
+
+## Usage
+
+```bash
+./Launcher.sh <protocol> <auth-mode> <capture-mode> <network-profile> <loss-percent> <delay-ms>
+```
+
+| Parameter          | Description                                                          | Values                                 | Default |
+|--------------------|----------------------------------------------------------------------|----------------------------------------|---------|
+| `<protocol>`       | Transport protocol                                                   | `tls`, `quic`                          | `tls`   |
+| `<auth-mode>`      | Authentication mode                                                  | `single` (server-only), `mutual`       | `single`|
+| `<capture-mode>`   | Packet capture options                                               | `capture`, `captureKey`, `nocapture`   | `nocapture`|
+| `<network-profile>`| Network impairment profile                                           | `none`, `simple`, `stable`, `unstable`| `none`  |
+| `<loss-percent>`   | Packet loss percentage (only for `simple`)                           | Integer 0–100                          | `0`     |
+| `<delay-ms>`       | Delay in milliseconds (only for `simple`)                            | Integer ≥ 0                            | `0`     |
+
+### Network Profiles
+
+- `none`: No delay or loss.  
+- `simple`: Static impairment — specify `<loss-percent>` and `<delay-ms>`.  
+- `stable`: Stable GE-model loss (pg10 pb50 h70 k10).  
+- `unstable`: Unstable GE-model loss (pg20 pb40 h90 k20).
+
+### Examples
+
+```bash
+# 1) TLS, server-only auth, no capture, no impairments
+./Launcher.sh tls single nocapture none 0 0
+
+# 2) QUIC, mutual TLS, full capture, simple 5% loss & 50 ms delay
+./Launcher.sh quic mutual capture simple 5 50
+
+# 3) TLS, server-only auth, key capture, unstable model
+./Launcher.sh tls single captureKey unstable 0 0
 ## Installation
 1. Create docker container executing: docker build -t oqs .
 2. Launching Benchmarks:  
