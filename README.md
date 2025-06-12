@@ -21,7 +21,7 @@ This project automates performance testing of TLS vs QUIC with various quantum-s
 
 ## Contains
 
-- **`Launcher.sh`** — Main benchmarking script  
+- **`Launcherv3.sh`** — Main benchmarking script  
 - **`Docker/`** — Dockerfiles  
 - **`Ideal/`** — Ideal case  
 - **`Size/`** — Size evaluation of the ideal case  
@@ -38,13 +38,13 @@ This project automates performance testing of TLS vs QUIC with various quantum-s
    ```
 2. **Make the launcher executable**:
    ```bash
-   chmod +x Launcher.sh
+   chmod +x Launcherv3.sh
    ```
 
 ## Usage
 
 ```bash
-./Launcher.sh <protocol> <auth-mode> <capture-mode> <network-profile> <loss-percent> <delay-ms>
+./Launcherv3.sh <protocol> <auth-mode> <capture-mode> <network-profile> <loss-percent> <delay-ms>
 ```
 
 | Parameter          | Description                                                          | Values                                 | Default |
@@ -67,13 +67,13 @@ This project automates performance testing of TLS vs QUIC with various quantum-s
 
 ```bash
 # 1) TLS, server-only auth, no capture, no impairments
-./Launcher.sh tls single nocapture none 0 0
+./Launcherv3.sh tls single nocapture none 0 0
 
 # 2) QUIC, mutual TLS, full capture, simple 5% loss & 50 ms delay
-./Launcher.sh quic mutual capture simple 5 50
+./Launcherv3.sh quic mutual capture simple 5 50
 
 # 3) TLS, server-only auth, key capture, unstable model
-./Launcher.sh tls single captureKey unstable 0 0
+./Launcherv3.sh tls single captureKey unstable 0 0
 ```
 ## Stadistical Evaluations
 
