@@ -84,7 +84,7 @@ fi
  OQS_SERVER="servidor"
  OQS_CLIENT="cliente"
  SUPPORTED_SIG_ALGS=("ed25519" "secp384r1" "secp521r1")
- KEMS_L1=("x25519" "x25519_mlkem512" "mlkem512" "x25519_hqc128" hqc128)
+ KEMS_L1=("P-256" "x25519" "p256_mlkem512" "x25519_mlkem512" "mlkem512")
  KEMS_L3=("P-384" "x448" "p384_mlkem768" "x448_mlkem768" "mlkem768")
  KEMS_L5=("P-521" "p521_mlkem1024" "mlkem1024")
 # Recoger el parámetro de línea de comandos
@@ -313,6 +313,7 @@ for SIG_ALG in "${SIG_ALGS[@]}"; do
               -e USE_TLS=$USE_TLS \
               -e SSLKEYLOGFILE=$SSLKEY_PATH \
               -e MUTUAL=$MUTUAL_AUTHENTICATION \
+              $( [ "$CAPTURE_MODE" = "captureKey" ] && echo "-e SSL_DIR=/sslkeys" ) \
               -d oqs perftestServerTlsQuic.sh
 
             sleep 3    
