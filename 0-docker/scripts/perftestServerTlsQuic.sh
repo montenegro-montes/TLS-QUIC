@@ -82,24 +82,36 @@ echo "Running $0 with SIG_ALG=$SIG_ALG and KEM_ALG=$KEM_ALG"
 
 if [ "$USE_TLS" = "true" ]; then
 
-    if [ -n "${SSL_KEY_DIR:-}" ]; then
-        KEYLOG_PATH="${SSL_KEY_DIR}/sslkeys_server_${SIG_ALG}_${KEM_ALG}.log"
+    if [ -n "${SSL_DIR:-}" ]; then
+        KEYLOG_PATH="${SSL_DIR}/sslkeys_server_${SIG_ALG}_${KEM_ALG}.log"
         echo "🔐 TLS Keys stored in: $KEYLOG_PATH"     
-        echo "Executing TLS"
-        openssl s_server -cert $CERT_PATH/server.crt -key $CERT_PATH/server.key -groups $DEFAULT_GROUPS -www -tls1_3 -accept :4433 -keylogfile "$KEYLOG_PATH"
+
+        if [ "$MUTUAL" = "true" ]; then    
+         echo "Executing TLS - Mutual Key"
+         openssl s_server -cert $CERT_PATH/server.crt -key $CERT_PATH/server.key -groups $DEFAULT_GROUPS -www -tls1_3 -verify 1 -verifyCAfile $CERT_PATH/CA.crt  -accept :4433 -keylogfile "$KEYLOG_PATH"
+        else
+         echo "Executing TLS - Single Key"   
+         openssl s_server -cert $CERT_PATH/server.crt -key $CERT_PATH/server.key -groups $DEFAULT_GROUPS -www -tls1_3 -accept :4433 -keylogfile "$KEYLOG_PATH" 
+        fi 
     else
         if [ "$MUTUAL" = "true" ]; then    
          echo "Executing TLS - Mutual"
-         openssl s_server -cert $CERT_PATH/server.crt -key $CERT_PATH/server.key -groups $DEFAULT_GROUPS -www -tls1_3 -verify 1 -verifyCAfile $CERT_PATH/CA.crt  -accept :4433 
+         openssl s_server -cert $CERT_PATH/server.crt -key $CERT_PATH/server.key -groups $DEFAULT_GROUPS -www -tls1_3 -verify 1 -verifyCAfile $CERT_PATH/CA.crt  -accept :4433
         else
          echo "Executing TLS - Single"   
-         openssl s_server -cert $CERT_PATH/server.crt -key $CERT_PATH/server.key -groups $DEFAULT_GROUPS -www -tls1_3 -accept :4433 
+         openssl s_server -cert $CERT_PATH/server.crt -key $CERT_PATH/server.key -groups $DEFAULT_GROUPS -www -tls1_3 -accept :4433
         fi 
     fi    
 
 else 
-     echo "Executing QUIC"
-     quics_server -groups:$DEFAULT_GROUPS -cert_file:$CERT_PATH/server.crt -key_file:$CERT_PATH/server.key
+     #echo "Executing QUIC"
+     if [ "$MUTUAL" = "true" ]; then    
+         echo "Executing QUIC - Mutual"
+         quics_server -groups:$DEFAULT_GROUPS -cert_file:$CERT_PATH/server.crt -key_file:$CERT_PATH/server.key -verifyCAfile $CERT_PATH/CA.crt
+        else
+         echo "Executing QUIC - Single"   
+         quics_server -groups:$DEFAULT_GROUPS -cert_file:$CERT_PATH/server.crt -key_file:$CERT_PATH/server.key
+        fi 
 fi
 
 # Give server time to come up first:

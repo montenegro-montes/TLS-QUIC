@@ -18,15 +18,32 @@ ARG LIBDIR
 # Stage 1: Install all necessary tools
 # --------------------------------------
 FROM ubuntu:24.10 AS base
+ENV DEBIAN_FRONTEND=noninteractive
 
-# Install required build tools and system dependencies.
-RUN apt update && apt install -y --no-install-recommends \
+# 1) Escribe sources.list apuntando a old-releases
+RUN set -eux; \
+  mv /etc/apt/sources.list /etc/apt/sources.list.bak || true; \
+  cat > /etc/apt/sources.list <<'EOF'
+deb http://old-releases.ubuntu.com/ubuntu oracular main restricted universe multiverse
+deb http://old-releases.ubuntu.com/ubuntu oracular-updates main restricted universe multiverse
+deb http://old-releases.ubuntu.com/ubuntu oracular-backports main restricted universe multiverse
+deb http://old-releases.ubuntu.com/ubuntu oracular-security main restricted universe multiverse
+EOF
+
+# 2) Sustituye cualquier entrada residual (.list y .sources), desactiva Valid-Until e instala
+RUN set -eux; \
+  find /etc/apt -type f \( -name '*.list' -o -name '*.sources' \) -print -exec sed -i \
+    -e 's|https\?://archive\.ubuntu\.com/ubuntu|http://old-releases.ubuntu.com/ubuntu|g' \
+    -e 's|https\?://security\.ubuntu\.com/ubuntu|http://old-releases.ubuntu.com/ubuntu|g' \
+    -e 's|https\?://ports\.ubuntu\.com/ubuntu-ports|http://old-releases.ubuntu.com/ubuntu|g' {} \; || true; \
+  printf 'Acquire::Check-Valid-Until "false";\n' > /etc/apt/apt.conf.d/99no-check-valid; \
+  apt-get update; \
+  apt-get install -y --no-install-recommends \
     cmake gcc ninja-build libunwind-dev \
     pkg-config build-essential \
     cargo git wget ca-certificates \
-    openssl libssl-dev \  
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
+    openssl libssl-dev; \
+  rm -rf /var/lib/apt/lists/*
 
 
 # --------------------------------------
@@ -58,9 +75,6 @@ WORKDIR ${OPENSSLDIR}
 RUN sed -i 's/#define MAX_SIG_NUM .*/#define MAX_SIG_NUM 512/' ./apps/speed.c && \
     sed -i 's/#define MAX_KEM_NUM .*/#define MAX_KEM_NUM 512/' ./apps/speed.c
 
-
-    #git clone --depth 1 --branch ${OPENSSL_TAG} https://github.com/javibc3/openssl.git
-    #git clone --depth 1 --branch ${OPENSSL_TAG} https://github.com/openssl/openssl.git
 
 WORKDIR $BASEDIR    
 RUN [ ! -d "${OQSPROVIDERDIR}" ] && \ 
@@ -169,8 +183,26 @@ ENV PATH="${INSTALLDIR}/bin:${PATH}"
 ENV OPENSSL=${INSTALLDIR}/bin/openssl
 ENV OPENSSL_CNF=${INSTALLDIR}/ssl/openssl.cnf
 
-RUN apt-get update && \ 
-    apt-get install -y --no-install-recommends ca-certificates iproute2 && \
+# 1) Escribe sources.list apuntando a old-releases
+RUN set -eux; \
+  mv /etc/apt/sources.list /etc/apt/sources.list.bak || true; \
+  cat > /etc/apt/sources.list <<'EOF'
+deb http://old-releases.ubuntu.com/ubuntu oracular main restricted universe multiverse
+deb http://old-releases.ubuntu.com/ubuntu oracular-updates main restricted universe multiverse
+deb http://old-releases.ubuntu.com/ubuntu oracular-backports main restricted universe multiverse
+deb http://old-releases.ubuntu.com/ubuntu oracular-security main restricted universe multiverse
+EOF
+
+# 2) Sustituye cualquier entrada residual (.list y .sources), desactiva Valid-Until e instala
+RUN set -eux; \
+  find /etc/apt -type f \( -name '*.list' -o -name '*.sources' \) -print -exec sed -i \
+    -e 's|https\?://archive\.ubuntu\.com/ubuntu|http://old-releases.ubuntu.com/ubuntu|g' \
+    -e 's|https\?://security\.ubuntu\.com/ubuntu|http://old-releases.ubuntu.com/ubuntu|g' \
+    -e 's|https\?://ports\.ubuntu\.com/ubuntu-ports|http://old-releases.ubuntu.com/ubuntu|g' {} \; || true; \
+  printf 'Acquire::Check-Valid-Until "false";\n' > /etc/apt/apt.conf.d/99no-check-valid; \
+  apt-get update; \
+  apt-get install -y --no-install-recommends \
+    ca-certificates iproute2 && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
@@ -184,8 +216,10 @@ RUN cp $INSTALLDIR/ssl/openssl.cnf $(openssl version -m | cut -d '"' -f2) && \
     LIBDIR=$(uname -m | grep -q x86_64 && echo "lib64" || echo "lib") && \ 
     cp ${INSTALLDIR}/${LIBDIR}/ossl-modules/* $(openssl version -d | cut -d '"' -f2)
 
+
 # Copy local files into the machine
 COPY scripts/*.sh ${INSTALLDIR}/bin
+RUN chmod 755 ${INSTALLDIR}/bin/*.sh
 
 WORKDIR ${INSTALLDIR}/bin
 

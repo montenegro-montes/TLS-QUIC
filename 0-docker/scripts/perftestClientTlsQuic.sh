@@ -94,15 +94,37 @@ i=1
    
          if [ "$MUTUAL" = "true" ]; then
            echo "Execution $i - TLS Mutual"
+
            openssl s_connection -connect $DOCKER_HOST:4433 -new  -verify 1 -CAfile $CERT_PATH/CA.crt -cert $CERT_PATH/user.crt  -key $CERT_PATH/user.key 
+        
          else
            echo "Execution $i - TLS Single" 
            openssl s_connection -connect $DOCKER_HOST:4433 -new -verify 1 -CAfile $CERT_PATH/CA.crt
 
          fi   
     else
-        echo "Execution $i - QUIC"
-        quics_connection -groups:$KEM_ALG -target:$DOCKER_HOST -CAfile:"$CERT_PATH/CA.crt"
+
+        # Solo si SSL_DIR está definido (cuando CAPTURE_MODE=captureKey)
+        if [ -n "${SSL_DIR:-}" ]; then
+            mkdir -p "$SSL_DIR"   # asegúrate de que exista el directorio montado
+            KEYLOG_PATH="${SSL_DIR}/sslkeys_client_${SIG_ALG}_${KEM_ALG}.log"
+            echo "🔐 QUIC keys will be stored in: $KEYLOG_PATH"
+
+            # Exporta la variable para que MsQUIC/OpenSSL la detecte
+            export SSLKEYLOGFILE="$KEYLOG_PATH"
+        fi
+        
+        #echo "Execution $i - QUIC"
+
+         if [ "$MUTUAL" = "true" ]; then
+           echo "Execution $i - QUIC Mutual"
+           quics_connection -groups:$KEM_ALG -target:$DOCKER_HOST -CAfile:"$CERT_PATH/CA.crt" -cert $CERT_PATH/user.crt  -key $CERT_PATH/user.key 
+
+         else
+           echo "Execution $i - QUIC Single" 
+           quics_connection -groups:$KEM_ALG -target:$DOCKER_HOST -CAfile:"$CERT_PATH/CA.crt"
+
+         fi   
     fi
 
 
