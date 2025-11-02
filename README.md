@@ -78,8 +78,6 @@ This project automates performance testing of TLS vs QUIC with various quantum-s
 # 4) QUIC, mutual TLS, full capture, simple 5% loss & 50 ms delay
 ./Launcherv3.sh quic mutual capture simple 5 50
 
-# 5) TLS, server-only auth, key capture, unstable model
-./Launcherv3.sh tls single captureKey unstable 0 0
 ```
 ## Stadistical Evaluations
 
