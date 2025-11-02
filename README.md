@@ -66,13 +66,19 @@ This project automates performance testing of TLS vs QUIC with various quantum-s
 ### Examples
 
 ```bash
-# 1) TLS, server-only auth, no capture, no impairments
+# 1) TLS, server-only auth, key capture, no impairments
+./Launcherv3.sh tls single captureKey none 0 0
+
+# 2) QUIC, server-only auth, key capture, no impairments
+./Launcherv3.sh quic single captureKey none 0 0
+
+# 3) TLS, server-only auth, no capture, no impairments
 ./Launcherv3.sh tls single nocapture none 0 0
 
-# 2) QUIC, mutual TLS, full capture, simple 5% loss & 50 ms delay
+# 4) QUIC, mutual TLS, full capture, simple 5% loss & 50 ms delay
 ./Launcherv3.sh quic mutual capture simple 5 50
 
-# 3) TLS, server-only auth, key capture, unstable model
+# 5) TLS, server-only auth, key capture, unstable model
 ./Launcherv3.sh tls single captureKey unstable 0 0
 ```
 ## Stadistical Evaluations
