@@ -34,7 +34,7 @@ This project automates performance testing of TLS vs QUIC with various quantum-s
 
 1. **Build the Docker image**:
    ```bash
-   docker build -t oqs .
+   docker build -t uma-tls-quic-pq-34 .
    ```
 2. **Make the launcher executable**:
    ```bash
