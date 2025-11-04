@@ -19,6 +19,7 @@ DELAY_MS=${6:-0}
 USAGE="Usage: $0 [tls|quic] [mutual|single] [capture|captureKey|nocapture] [none|simple|stable|unstable] [loss-percent] [delay-ms]"
 
 MUTUAL_AUTHENTICATION=false
+IMAGE=uma-tls-quic-pq-34
 os=""
 ###############################################################################
 #  Input Validation
@@ -280,7 +281,7 @@ for SIG_ALG in "${SIG_ALGS[@]}"; do
 
     echo ""
     echo " ==> Creating Certs and Keys"
-    docker run --rm -v cert:/cert -e CERT_PATH=/cert/ -e SIG_ALG=$SIG_ALG -it oqs doCert.sh
+    docker run --rm -v cert:/cert -e CERT_PATH=/cert/ -e SIG_ALG=$SIG_ALG -it "$IMAGE" doCert.sh
 
     
     for KEM in "${KEMS[@]}"; do
@@ -296,9 +297,17 @@ for SIG_ALG in "${SIG_ALGS[@]}"; do
             docker rm -f $OQS_SERVER $OQS_CLIENT 2>/dev/null
 
             SSL_DIR="$HOME/captures/sslkeys"
-            mkdir -p "$SSL_DIR"
-            SSLKEY_NAME="sslkeys_server_${SIG_ALG}_${KEM}.log"
-            SSLKEY_PATH="/sslkeys/$SSLKEY_NAME"
+
+            if [ "$PROTOCOL" = "tls" ] && [ "$CAPTURE_MODE" = "captureKey" ]; then
+                mkdir -p "$SSL_DIR"
+
+                SSLKEY_NAME="sslkeys_server_${SIG_ALG}_${KEM}.log"
+                SSLKEY_PATH="$SSL_DIR/$SSLKEY_NAME"
+
+                echo "[INFO] TLS Capture mode server: saving SSL keys to $SSLKEY_PATH"
+                export SSLKEYLOGFILE="$SSLKEY_PATH"
+            fi
+    
 
             docker run --cap-add=NET_ADMIN  \
               --name $OQS_SERVER  \
@@ -311,11 +320,10 @@ for SIG_ALG in "${SIG_ALGS[@]}"; do
               -e KEM_ALG=$KEM  \
               -e SIG_ALG=$SIG_ALG \
               -e USE_TLS=$USE_TLS \
-              -e SSLKEYLOGFILE=$SSLKEY_PATH \
               -e MUTUAL=$MUTUAL_AUTHENTICATION \
-              $( [ "$CAPTURE_MODE" = "captureKey" ] && echo "-e SSL_DIR=/sslkeys" ) \
-              -d oqs perftestServerTlsQuic.sh
-
+             $( [ "$PROTOCOL" = "tls" ] && [ "$CAPTURE_MODE" = "captureKey" ] && echo "-e SSL_DIR=/sslkeys" ) \
+              -d $IMAGE perftestServerTlsQuic.sh
+           
             sleep 3    
 
             echo "    Buscando IP.. "
@@ -366,13 +374,19 @@ for SIG_ALG in "${SIG_ALGS[@]}"; do
             sleep 2
             echo "    Executing docker Client... $IP"
 
-            SSL_DIR="$HOME/captures/sslkeys"
-            mkdir -p "$SSL_DIR"
+                #SSL_DIR="$HOME/captures/sslkeys"
 
-            SSLKEY_NAME="sslkeys_${SIG_ALG}_${KEM}.log"
-            SSLKEY_PATH="/sslkeys/$SSLKEY_NAME"  # Esta ruta es dentro del contenedor
+            if [ "$PROTOCOL" = "quic" ] && [ "$CAPTURE_MODE" = "captureKey" ]; then
+                mkdir -p "$SSL_DIR"
 
+                SSLKEY_NAME="sslkeys_client_${SIG_ALG}_${KEM}.log"
+                SSLKEY_PATH="$SSL_DIR/$SSLKEY_NAME"
 
+                echo "[INFO] QUIC capture mode client: saving SSL keys to $SSLKEY_PATH"
+                export SSLKEYLOGFILE="$SSLKEY_PATH"
+            fi
+
+           
             docker create --cap-add=NET_ADMIN \
                 --network localNet \
                 --name $OQS_CLIENT  \
@@ -387,10 +401,9 @@ for SIG_ALG in "${SIG_ALGS[@]}"; do
                 -e USE_TLS=$USE_TLS \
                 -e NUM_RUNS=$NUM_RUNS \
                 -e MUTUAL=$MUTUAL_AUTHENTICATION \
-                -e SSLKEYLOGFILE="$SSLKEY_PATH" \
-                oqs sleep infinity
+                $( [ "$PROTOCOL" = "quic" ]  && [ "$CAPTURE_MODE" = "captureKey" ] && echo "-e SSL_DIR=/sslkeys" ) \
+                "$IMAGE" sleep infinity
 
-            
 
             docker start $OQS_CLIENT
 
@@ -434,5 +447,3 @@ sleep 3
 
 cleaning
 echo "✅  Cleanup complete. Tests finished."
-
-
