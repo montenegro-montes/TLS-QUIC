@@ -365,7 +365,7 @@ for SIG_ALG in "${SIG_ALGS[@]}"; do
               stable|unstable)
                 args=("${STABLE_GEMODEL[@]}")
                 [[ "$NETWORK_PROFILE" == "unstable" ]] && args=("${UNSTABLE_GEMODEL[@]}")
-                echo "   ↳ Applying ${PROFILE} network profile (loss-gemodel pg${args[0]} pb${args[1]} h${args[2]} k${args[3]})"
+                echo "   ↳ Applying ${NETWORK_PROFILE} network profile (loss-gemodel pg${args[0]} pb${args[1]} h${args[2]} k${args[3]})"
                 ./pumba netem --duration 1h --interface $NETIF \
                   loss-gemodel --pg "${args[0]}" --pb "${args[1]}" \
                   --one-h "${args[2]}" --one-k "${args[3]}" "$OQS_SERVER" & PUMBA_PIDS_SERVER+=($!)
