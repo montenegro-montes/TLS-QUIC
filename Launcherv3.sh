@@ -90,7 +90,9 @@ fi
  KEMS_L5=("P-521" "p521_mlkem1024" "mlkem1024")
 # Recoger el parámetro de línea de comandos
  USE_TLS=$([[ "$PROTOCOL" == "tls" ]] && echo true || echo false)
- 
+ # Perfiles GE-model (valores en %)
+STABLE_GEMODEL=(10 50 70 10)    # pg10 pb50 h70 k10
+UNSTABLE_GEMODEL=(20 40 90 20)  # pg20 pb40 h90 k20
 
 
 echo "*************************************"
