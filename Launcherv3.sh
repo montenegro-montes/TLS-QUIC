@@ -18,6 +18,7 @@ DELAY_MS=${6:-0}
 
 USAGE="Usage: $0 [tls|quic] [mutual|single] [capture|captureKey|nocapture] [none|simple|stable|unstable] [loss-percent] [delay-ms]"
 
+NETIF="eth0"
 MUTUAL_AUTHENTICATION=false
 IMAGE=uma-tls-quic-pq-34
 os=""
